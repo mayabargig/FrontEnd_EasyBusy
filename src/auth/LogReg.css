@@ -1,0 +1,40 @@
+label{
+    margin: 20px;
+    padding: 10px;
+    justify-content:space-evenly;
+}
+
+select,option,input{
+    left: 0%;
+    border: 2px solid black;
+}
+
+#logPara{
+    color: white;
+    text-decoration: underline;
+
+}
+
+#logPara:hover{
+    color: rgb(172, 158, 158);
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+#LoginForm{
+    max-width: 500px;
+    padding: 40px;
+    margin: 0%;
+    color: white;
+}
+
+#logSignP{
+    align-items: center;
+    display: flex;
+    color: white;
+    flex-direction: column;
+}
+
+.text-muted{
+    color: white;
+}

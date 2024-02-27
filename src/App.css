@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  /* /* padding: 0; */
+  box-sizing: border-box;
+  font-family: "Anton", sans-serif; 
+}
+
+.appointmentCard{
+  background-color: #fff;
+  max-width: 240px; 
+  margin: 2px auto; 
+  border: solid 1.5px black;
+  border-radius: 5px;
+  box-shadow: 0 7px 10px rgba(0, 0, 0.2, 0.8); 
+  text-align: center; 
+  overflow: hidden;
+  width: 100%;
+  display: grid;
+}
+
+#appointmentContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+  height: auto; 
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  margin: 10px;
+}
+
+.productCard{
+  margin: 10px
+}
+
+#productsContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+  height: auto; 
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  margin: 20px;
+  align-items: center;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+
+.divIcons{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.GoToLink:hover, .me-auto> a:hover{
+  color: black;
+} 
+
+.GoToLink{
+  color: white;
+  text-decoration: inherit;
+}
+
+.divHearts{
+  margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.divHearts> div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.removeBtn{
+  position: absolute;
+  left: 220px;
+}
+
+#card{
+  display: grid;
+  place-items: center;
+  height: 100%;
+  margin: 20px;
+}
+
+.penEdit{
+  position: absolute;
+  cursor: pointer;
+  left: 25px;
+  top: 25px;
+  color: white;
+}
+
+.AppointmentContainer{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  place-items: center;
+  height: 100%;
+  margin: 20px;
+}
+
+#tableContainer{
+  place-items: center;
+  height: 100%;
+  margin: 20px;
+}
+
+.background {
+  max-width: 1280px;
+  height: 120vh;
+  background-size: cover;
+  background-position: center;
+}
+
+#goBTN{
+  margin: 10px;
+}
