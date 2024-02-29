@@ -10,16 +10,35 @@ import HomeSingleEl from './components/HomeSingleEl';
 import Appointments from './pages/Appointments';
 import { UserContext } from './context/User';
 import UserCardEdit from './components/UserCardEdit';
-import Login from './auth/Login';
-import Register from './auth/Register';
+import Cart from './pages/Cart';
+import { APIBaseUrl } from './config';
 
 function App() {
   const { user, token } = useContext(UserContext);
   const [isUserLog, setUserLog] = useState([]);
+  const [cartCount, setCartCount]= useState();
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    getCarts();
+  },[])
+
+  const getCarts =async ()=>{
+    fetch(`${APIBaseUrl}/cart`)
+    .then(res=> res.json())
+    .then(res=>{
+      setCart(res);
+      setCartCount(res.length)
+      setLoading(false);
+    })
+    .catch(err=> console.log(err))
+    setLoading(false)
+  }
 
   return (
     <Router>
-      <NavBar />
+      <NavBar cartCount={cartCount} getCarts={getCarts}/>
       {
         user ?
           <Routes>
@@ -38,6 +57,9 @@ function App() {
             <Route path='/favorites' element={<Favorites
             />} />
             <Route path='/appointment' element={<Appointments
+            />} />
+            <Route path='/cart' element={<Cart loading={loading} cart={cart}
+            setCart={setCart} getCarts={getCarts}
             />} />
             <Route path='*' element={<Home />} />
           </Routes>

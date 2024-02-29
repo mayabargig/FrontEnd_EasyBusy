@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HomeCard from '../components/HomeCard';
 import HomeSingleEl from '../components/HomeSingleEl';
 import { APIBaseUrl } from '../config';
 import HomeCardEdit from '../components/HomeCardEdit';
 import {PlusCircleFill} from 'react-bootstrap-icons'
+import { UserContext } from '../context/User';
 
 
 export default function Home() {
+  const { user } = useContext(UserContext);
   const [products, setProducts]= useState([]);
   const [isClick, setClick]= useState(false);
  
@@ -35,8 +37,12 @@ export default function Home() {
         ):(
           <div>
             <h1>All My Products...
+              {
+              user.role === "regular"?(
+                <button onClick={addLink}type="button" className="btn btn-light" title='Add Product'> <PlusCircleFill/></button>
+              ):null 
+              }
             </h1>
-            <button onClick={addLink}type="button" class="btn btn-info">Add Product <PlusCircleFill/></button>
           <div id='productsContainer'>
       {
         products.map((item, i)=>{

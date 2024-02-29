@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function UserCard() {
     const { user }=useContext(UserContext);
-    console.log(user);
+    // console.log(user);
     // const [user, setUser] = useState({gender:"male"})
     useEffect(()=>{
 

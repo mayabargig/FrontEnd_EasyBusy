@@ -1,3 +1,15 @@
+@media screen and (max-width: 770px) {
+    .nav-menu {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (min-width: 770px) {
+    .nav-menu {
+      flex-direction: row;
+    }
+  }
+
 .navbar{
     display: flex;
     justify-content: space-around;
@@ -13,6 +25,7 @@
 
 .nav-menu{
     display: flex;
+    /* flex-direction: row; */
     align-items: center;
     list-style: none;
     gap: 50px;
@@ -22,6 +35,7 @@
 
 .nav-menu> li{
     display: flex;
+    flex-direction: row;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -37,7 +51,6 @@
     justify-content: center;
     gap: 3px;
     cursor: pointer;
-    /* transition: transform 0.3s; */
     transform: scale(1.1);
 }
 
@@ -46,7 +59,6 @@
     height: 3px;
     width: 30px;
     border-radius: 10px;
-    /* color: #FF4141; */
     background-color: #FF4141;
 }
 
@@ -56,35 +68,37 @@
     gap: 45px;
 }
 
-.nav-login-cart button{
-    width: 90px;
-    height: 40px;
+#outBtn{
+    width: 70px;
+    height: 35px;
     outline: none;
     border: 1px solid #7a7a7a;
     border-radius: 75px;
     color: #515151;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
     background-color: white;
     cursor: pointer;
+    margin: 1rem;
+    margin-bottom: 1.4rem;
+    margin-left: 1.2rem;
 }
 
-.nav-login-cart button:active{
+#outBtn:active{
     background-color: #FF4141;
 }
 
 .nav-card-count{
-    width: 15px;
-    height: 15px;
+    position: absolute;
+    width: 12px;
+    height: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -30px;
-    margin-left: -50px;
-    /* margin-top: -40px;
-    margin-right: -30px; */
+    margin-top: -2.3rem;
+    margin-left: 2.6rem;
     border-radius: 11px;
-    font-size: 10px;
+    font-size: 8px;
     background: red;
     color: white;
 }
@@ -96,3 +110,4 @@
 #outBtn:hover{
     transform: scale(1.1);
 }
+

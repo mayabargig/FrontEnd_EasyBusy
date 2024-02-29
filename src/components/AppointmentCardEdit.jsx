@@ -5,15 +5,19 @@ import { APIBaseUrl } from '../config';
 import { Input, TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import { PencilSquare, Trash3Fill, ArrowLeftSquare } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function AppointmentCardEdit(props) {
-    const { addLink, appointments, setAppointments } = props;
+    const { addLink, appointments, setAppointments, fetchAppointment } = props;
     const [editableId, setEditableId] = useState(null);
     const { user, token } = useContext(UserContext);
     const [isAdmin, setIsAdmin] = useState(true);
     const [isClick, setClick] = useState(false);
     const format = 'HH:mm';
     const [formData, setFormData] = useState([]);
+    const navigate = useNavigate();
+    const [ updateAppointment, setUpdateAppointment]= useState({});
+    const [appointment, setAppointment]= useState({});
 
     useEffect(() => {
         if (user.role === "regular") {
@@ -23,34 +27,36 @@ export default function AppointmentCardEdit(props) {
         }
     }, []);
 
+    // useEffect(() => {
+    //     console.log(appointments);
+    // }, [appointments]);
+
     const handleEdit = (id) => {
         setEditableId(id);
     };
 
     const handleSave = async (id) => {
-        try {
-            const updatedAppointments = appointments.map((appointment) => {
-                if (appointment.id === id) {
-                    return { ...appointment, /* updated fields */ };
-                }
-                return appointment;
-            });
-
-            const res = await fetch(`${APIBaseUrl}/appointments/${id}`, {
+        console.log(updateAppointment);
+        try{
+            const res = await fetch(`${APIBaseUrl}/appointment/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(updatedAppointments.find((appointment) => appointment.id === id)),
+                body: JSON.stringify(updateAppointment),
             });
-
+            const data = await res.json();
             if (res.status === 200) {
-                setAppointments(updatedAppointments);
+                setAppointment(data);
                 setEditableId(null);
+                fetchAppointment();
+                console.log(appointments);
+                // navigate('/appointment')
             } else {
                 console.error('Failed to update appointment');
             }
-        } catch (error) {
+        }catch (error) {
             console.error(error);
         }
     };
@@ -64,6 +70,7 @@ export default function AppointmentCardEdit(props) {
     };
 
     const handleInputChange = (name, value) => {
+        console.log(name, value);
         /** @type {string[]} */
         const spreadName = name?.split('.')
         if (spreadName?.length > 1) {
@@ -110,12 +117,24 @@ export default function AppointmentCardEdit(props) {
         }
     }
 
+    const handleBlur = (field, value) => {
+        const spreadName = field?.split('.')
+        if (spreadName?.length > 1) {
+            setUpdateAppointment(prev => ({ ...prev, [spreadName[0]]: { ...(prev?.[spreadName[0]] || {}), [spreadName[1]]: value } }));
+        } else {
+        setUpdateAppointment(prev => ({ ...prev, [field]: value }))
+        }
+      };
+
+
     return (
         <div id='tableContainer'>
+            <div>
             <button onClick={addClick} type="button" className="btn btn-primary">Add</button>
             <button onClick={addLink} type="button" className="btn btn-warning">Go Back <ArrowLeftSquare /></button>
+            </div>
             {
-                appointments ? (
+                (appointments) ? (
 
                     <Table striped bordered hover>
                         <thead>
@@ -133,15 +152,35 @@ export default function AppointmentCardEdit(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {appointments.map((appointment) => (
-                                <tr key={appointment._id}>
-                                    <td>{appointment.title}</td>
-                                    <td>{appointment.date}</td>
-                                    <td>{appointment.timeSlot.start}</td>
-                                    <td>{appointment.timeSlot.end}</td>
+                            {appointments.map((appointment) => { 
+                                return <tr key={appointment._id}>
+                                    <td 
+                                    contentEditable={editableId===appointment.id}
+                                    onBlur={(e) => handleBlur("title", e.target.innerText)}
+                                    >
+                                        {appointment.title}</td>
+                                    <td
+                                     contentEditable={editableId===appointment.id}
+                                     onBlur={(e) => handleBlur("date", e.target.innerText)}
+                                    >
+                                        {appointment.date}</td>
+                                    <td
+                                     contentEditable={editableId===appointment.id}
+                                     onBlur={(e) => handleBlur("timeSlot.start", e.target.innerText)}
+                                     >
+                                        {appointment.timeSlot.start}</td>
+                                    <td
+                                     contentEditable={editableId===appointment.id}
+                                     onBlur={(e) => handleBlur("timeSlot.end", e.target.innerText)}
+                                     >
+                                        {appointment.timeSlot.end}</td>
                                     {
                                         isAdmin ? (
-                                            <td>{appointment.userName}</td>
+                                            <td
+                                            contentEditable={editableId===appointment.id}
+                                            onBlur={(e) => handleBlur("userName", e.target.innerText)}
+                                            >
+                                                {appointment.userName}</td>
                                         ) : null
                                     }
                                     <td>
@@ -155,8 +194,8 @@ export default function AppointmentCardEdit(props) {
                                         ) : null}
                                         <button onClick={() => deleteAppointment(appointment.id)} type="button" className="btn btn-danger">Delete<Trash3Fill /></button>
                                     </td>
-                                </tr>
-                            ))}
+                                </tr>}
+                            )}
                         </tbody>
                         {isClick ? (
                             <tbody>

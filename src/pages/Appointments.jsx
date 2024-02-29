@@ -16,10 +16,10 @@ export default function Appointments() {
     const [appointments, setAppointments] = useState([]);
     const [appointmentsDay, setAppointmentsDay] = useState([]);
     const businessStartTime = '09:00';
-    const businessEndTime = '17:00'
+    const businessEndTime = '17:00';
+    const [date, setDate] = useState({});
 
     useEffect(() => {
-        fetchAppointment()
         if (value)
             fetchAppointmentDay(value)
     }, [value]);
@@ -30,8 +30,6 @@ export default function Appointments() {
 
     const fetchAppointmentDay = (newValue) => {
         console.log({ newValue });
-        // newValue.setDate(newValue.getDate() + 1)
-        // let date = newValue.toJSON().substring(0, 10).replace(/-/g, "/");
         let date = new Date(newValue),
             month = '' + (date.getMonth() + 1),
             day = '' + date.getDate(),
@@ -42,6 +40,7 @@ export default function Appointments() {
         if (day.length < 2)
             day = '0' + day
 
+        setDate([year, month, day].join('-'));
         console.log([year, month, day].join('-'));
         fetch(`${APIBaseUrl}/appointment/?date=${[year, month, day].join('-')}`)
             .then(res => res.json())
@@ -64,8 +63,9 @@ export default function Appointments() {
             .catch(err => console.log(err))
     };
 
-    const sendEmailToCheck = async (item, newDate, dayOfWeek, startTime, endTime) => {
+    const sendEmailToCheck = async ( newDate, dayOfWeek, startTime, endTime) => {
         // console.log(item,newDate,dayOfWeek);
+        // add title
         try {
             const response = await fetch(`${APIBaseUrl}/appointment/sendEmail`, {
                 method: 'POST',
@@ -77,7 +77,7 @@ export default function Appointments() {
                     subject: 'New Appointment',
                     message: `<h2>Hello ${user.firstName}</h2>
                       <h4> Thank u for choose our business</h4>
-                      <p>Your ${item.title} appointment scheduled for:</p>
+                      <p>Your appointment scheduled for:</p>
                       <p>${dayOfWeek}, ${newDate}: ${startTime}-${endTime}</p>
                       We will be glad to see you :)` })
             });
@@ -98,11 +98,11 @@ export default function Appointments() {
     return (
         <div className='AppointmentContainer'>
             {isClick ? (
-                <AppointmentCardEdit addLink={addLink}
+                <AppointmentCardEdit addLink={addLink} fetchAppointment={fetchAppointment}
                     appointments={appointments} setAppointments={setAppointments} />
             ) : (
                 <div className='AppointmentContainer'>
-                    <div>
+                    <div id='calenderDiv'>
                         <h1>Appointment</h1>
                         <h3> Opening Hours: {businessStartTime}-{businessEndTime}</h3>
                         {/* <div id='card'> */}
@@ -114,11 +114,8 @@ export default function Appointments() {
                     </div>
                     <div id='appointmentContainer'>
                         {
-                            // appointmentsDay.map((item, i) => {
-                            // return 
                             <AppointmentCard items={appointmentsDay}
-                                sendEmailToCheck={sendEmailToCheck} />
-                            // })
+                                sendEmailToCheck={sendEmailToCheck} date={date} />
                         }
                     </div>
                 </div>

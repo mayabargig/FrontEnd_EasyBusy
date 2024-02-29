@@ -11,6 +11,7 @@ export default function HomeCard(props) {
   const { user } = useContext(UserContext);
   const [isLiked, setLiked] = useState();
   const [favorites, setFavorites] = useState([]);
+  const [cart, setCart] = useState([]);
   const {item, setProducts, products}= props;
 
     const clickFav = (id)=>{
@@ -51,6 +52,26 @@ export default function HomeCard(props) {
         console.log(error);
       }
   }
+
+  const addProductToCart =async (productId)=>{
+    console.log(user.id);
+    console.log(productId);
+    try{
+      const res = await fetch(`${APIBaseUrl}/cart`, {
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({product:productId, userId:user.id})
+      });
+      const data= await res.json();
+      setCart([...cart,data.data]);
+      // console.log(data);
+    }
+    catch(error){
+      console.log(error);
+    }
+}
 
   const deleteProduct = async(id)=>{
     console.log(id);
@@ -103,7 +124,7 @@ export default function HomeCard(props) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item> {item.price} $</ListGroup.Item>
-        <ListGroup.Item>category</ListGroup.Item>
+        <ListGroup.Item>Category: {item.category}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
       <Button variant="primary">
@@ -111,7 +132,7 @@ export default function HomeCard(props) {
             See More <SendCheck/>
             </Link>
           </Button>
-          <button type="button" className="btn btn-outline-danger">
+          <button onClick={()=>addProductToCart(item.id)}type="button" className="btn btn-outline-danger">
              Add To Card <Cart/></button>
       </Card.Body>
     </Card>
