@@ -2,16 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import UserProvider from './context/User.jsx'
-// import './App.css'
+import UserProvider from './src/context/User.jsx'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    // <React.StrictMode>
         <UserProvider>
             <div className=' dark:text-white dark:bg-black'>
             <App />
             </div>
         </UserProvider>
-    // </React.StrictMode>,
 )
 

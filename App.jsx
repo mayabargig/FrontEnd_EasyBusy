@@ -1,18 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from './pages/Home.page'
-import User from './pages/User.page'
-import Auth from './pages/Auth.page'
-import NavBar from './components/NavBar'
-import Favorites from './pages/Favorites.page';
-import HomeSingleEl from './components/HomeSingleEl';
-import Appointments from './pages/Appointments';
-import { UserContext } from './context/User';
-import UserCardEdit from './components/UserCardEdit';
-import Cart from './pages/Cart';
-import ThemeBtn from './context/ThemeBtn';
-import { ThemeProvider } from './context/Theme';
+import Home from './src/pages/Home.page'
+import User from './src/pages/User.page'
+import Auth from './src/pages/Auth.page'
+import NavBar from './src/components/NavBar'
+import Favorites from './src/pages/Favorites.page';
+import HomeSingleEl from './src/components/HomeSingleEl';
+import Appointments from './src/pages/Appointments';
+import { UserContext } from './src/context/User';
+import UserCardEdit from './src/components/UserCardEdit';
+import Cart from './src/pages/Cart';
+import ThemeBtn from './src/context/ThemeBtn';
+import { ThemeProvider } from './src/context/Theme';
 // import { Toggle } from './toggle/Toggle';
 import useLocalStorage from 'react-use-localstorage';
 
