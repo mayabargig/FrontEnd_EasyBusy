@@ -33,8 +33,8 @@ function HomeSingleEl (){
     },[]);
 
     return(
-      <div className='productCard' id='card'>
-      <Card style={{ width: '18rem' }}>
+      <div className='productCard  dark:text-white dark:bg-black' id='card'>
+      <Card style={{ width: '18rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black" }} className=' dark:text-white dark:bg-black'>
       <div className='divHearts'>
           <div>
           {
@@ -63,8 +63,8 @@ function HomeSingleEl (){
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item> {product.price} $</ListGroup.Item>
-        <ListGroup.Item>category</ListGroup.Item>
+        <ListGroup.Item className=' dark:text-white dark:bg-black'> {product.price} $</ListGroup.Item>
+        <ListGroup.Item className=' dark:text-white dark:bg-black'>category</ListGroup.Item>
       </ListGroup>
       <Card.Body>
           <button type="button" className="btn btn-outline-danger">

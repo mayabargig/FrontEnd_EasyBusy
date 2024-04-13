@@ -38,7 +38,7 @@ export default function Home() {
           <div>
             <h1>All My Products...
               {
-              user.role === "regular"?(
+              user.role === "admin"?(
                 <button onClick={addLink}type="button" className="btn btn-light important!" title='Add Product'> <PlusCircleFill/></button>
               ):null 
               }

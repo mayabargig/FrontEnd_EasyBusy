@@ -20,7 +20,7 @@ export default function AppointmentCardEdit(props) {
     const [appointment, setAppointment]= useState({});
 
     useEffect(() => {
-        if (user.role === "regular") {
+        if (user.role === "admin") {
             setIsAdmin(true)
         } else {
             setIsAdmin(false)
@@ -185,14 +185,16 @@ export default function AppointmentCardEdit(props) {
                                     }
                                     <td className=' dark:text-white dark:bg-black'>
                                         {isAdmin && editableId !== appointment.id ? (
+                                            <>
                                             <Button onClick={() => handleEdit(appointment.id)}>Edit <PencilSquare /></Button>
+                                            <button onClick={() => deleteAppointment(appointment.id)} type="button" className="btn btn-danger">Delete<Trash3Fill /></button>
+                                            </>
                                         ) : editableId === appointment.id ? (
                                             <>
                                                 <Button onClick={() => handleSave(appointment.id)}>Save</Button>
                                                 <Button onClick={handleCancel}>Cancel</Button>
                                             </>
                                         ) : null}
-                                        <button onClick={() => deleteAppointment(appointment.id)} type="button" className="btn btn-danger">Delete<Trash3Fill /></button>
                                     </td>
                                 </tr>}
                             )}
