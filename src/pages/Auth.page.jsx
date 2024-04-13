@@ -4,9 +4,11 @@ import Register from '../auth/Register'
 import { APIBaseUrl } from '../config';
 import { UserContext } from '../context/User';
 // import {background} from '../images/background.jpg'
+import backgroundLight  from '../images/backgroundLight.jpg'
+import  macDark from '../images/macDark.jpg'
 
 export default function Auth (props) {
-  const { isUserLog, setUserLog }= props;
+  const { isUserLog, setUserLog, themeMode}= props;
   const { user, setUser}=useContext(UserContext);
   // console.log(props);
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -86,15 +88,15 @@ export default function Auth (props) {
 
 
   return (
-    <div id="logSignP"  className="background"
-    style={{ backgroundImage: `url('https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg?size=626&ext=jpg')` }}>
+    <div id="logSignP"  className="background  dark:text-white dark:bg-black"
+    style={{ backgroundImage: `url(${themeMode === "dark"? `${macDark}`:`${backgroundLight}`})` }}>
     {
         isLoginMode ? <Login handelSubmit={handelSubmit} changeHandler={changeHandler}/> 
         : <Register handelSubmit={handelSubmit} changeHandler={changeHandler} 
         address={address} setAddress={setAddress} />
     }
     <br></br>
-    <p onClick={toggleMode} id="logPara">
+    <p onClick={toggleMode} id="logPara" className=' dark:text-white dark:bg-black'>
     {isLoginMode ? "Go To Create Account" : "Already Have Account ?" }
     </p>
     </div>

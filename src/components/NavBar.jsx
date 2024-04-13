@@ -8,23 +8,25 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import EasyBusyicon from '../images/EasyBusyicon.png'
-import { Toggle } from '../toggle/Toggle';
+// import { Toggle } from '../toggle/Toggle';
 import '../toggle/Toggle.css'
 
 export default function NavBar(props) {
-  const { user, SingOutClick, token }=useContext(UserContext);
+  const { user, SingOutClick, token, cartCount, getCarts }=useContext(UserContext);
   const [menu, setMenu]= useState("shop");
-  const { cartCount, getCarts} = props;
+  const { themeMode} = props;
 
   useEffect(()=>{
     getCarts();
-  },[])
+  },[]);
 
   return (
-    <div>
+    <div className=' dark:text-white dark:bg-black'>
         {
-            user? <div className="navbar">
-          <Navbar expand="lg" className="bg-body-tertiary">
+            user? <div id="navbar">
+          <Navbar expand="lg"
+            className={themeMode === "dark" ? "navbar navbar-dark bg-dark" 
+            : "navbar navbar-light"} >
           <Container>
           <Navbar.Brand href="#home">
             <img src={EasyBusyicon} style={{ width: '3rem', height: '3rem' }}/>
@@ -34,26 +36,25 @@ export default function NavBar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <ul className='nav-menu'>
-            <Toggle/>
                 <li onClick={()=>{setMenu("home")}}>
-                <Link to="/home">Home <HouseGear/> </Link> 
+                <Link className=' dark:text-white' to="/home">Home <HouseGear/> </Link> 
                 {menu==="home"?<hr></hr>:<></>}
                 </li>
                 <li onClick={()=>{setMenu("user")}}>
-                <Link to="/profile">User <PersonCircle/></Link> 
+                <Link className=' dark:text-white' to="/profile">User <PersonCircle/></Link> 
                 {menu==="user"?<hr></hr>:<></>}
                 </li>
                 <li onClick={()=>{setMenu("appointment")}}>
-                <Link to="/appointment">Appointment <Calendar/></Link> 
+                <Link className=' dark:text-white' to="/appointment">Appointment <Calendar/></Link> 
                 {menu==="appointment"?<hr></hr>:<></>}
                 </li>
                 <li onClick={()=>{setMenu("favorites")}}>
-                <Link to="/favorites">Favorites <BookmarkHeartFill/></Link> 
+                <Link className=' dark:text-white' to="/favorites">Favorites <BookmarkHeartFill/></Link> 
                 {menu==="favorites"?<hr></hr>:<></>}
                 </li>
                 <li onClick={()=>{setMenu("cart")}}>
             {/* <div className='nav-login-cart'> */}
-                <Link to="/cart">Cart 
+                <Link className=' dark:text-white' to="/cart">Cart 
                 <Cart/>
                 <div className='nav-card-count'>{cartCount}</div>
                 </Link> 
@@ -68,8 +69,10 @@ export default function NavBar(props) {
           </Navbar.Collapse>
           </Container>
           </Navbar>
-        </div>:
-        <Navbar expand="lg" className="bg-body-tertiary">
+        </div>
+        :
+        <Navbar expand="lg"  className={themeMode === "dark" ? "navbar navbar-dark bg-dark" 
+        : "navbar navbar-light"} >
           <Container>
           <Navbar.Brand href="#home">
           <img src={EasyBusyicon} style={{ width: '3rem', height: '3rem' }}/>
@@ -83,7 +86,7 @@ export default function NavBar(props) {
                 </div> */}
           <Nav className="me-auto">
                     <li onClick={()=>{setMenu("auth")}}>
-                    <Link to="/auth">Auth <HouseGear/> </Link>
+                    <Link className=' dark:text-white' to="/auth">Auth <HouseGear/> </Link>
                     {menu==="auth"?<hr></hr>:<></>}
                     </li>
                     </Nav>

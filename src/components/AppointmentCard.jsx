@@ -69,27 +69,24 @@ export default function AppointmentCard(props) {
           <div key={`${hours.startTime}-${hours.endTime}`}>
             {occupiedAppointments?.some(i => i?.startTime == hours?.startTime) ?
               <div className="card text-white bg-danger mb-3" style={{ minWidth: 10 + "rem", minHeight: 8 + "rem" }}>
-                <div className="card-header">Unavailable Appointment <BellSlash /></div>
+                <div className="card-header" style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
+                  Unavailable Appointment <BellSlash /></div>
                 <div className="card-body">
                   <h6 className="card-title">At {dayOfWeek}</h6>
                   <p className="card-text">Hours: {hours.startTime}-{hours.endTime}</p>
-                  {/* <p className="card-text">Check Appointment: </p> */}
-                  {/* {item.title} <Clock /></p> */}
                 </div>
               </div>
               :
               <div id='available' className="card text-white bg-success mb-3"
                 style={{ minWidth: 10 + "rem", minHeight: 8 + "rem" }}>
-                <div className="card-header">Available <Bell /> 
-                <Button onClick={() => { sendEmailToCheck( date, dayOfWeek, hours.startTime, hours.endTime) }}>
+                <div className="card-header" style={{display:'flex', flexDirection:'row', alignItems:'center'}} >Available <Bell /> 
+                <Button onClick={() => { sendEmailToCheck( date, dayOfWeek, hours.startTime, hours.endTime) }}
+                style={{display:'flex', flexDirection:'row'}} >
                 Check <Clock /></Button>
                 </div>
                 <div className="card-body">
                   <h6 className="card-title">At {dayOfWeek}, {date}</h6>
                   <p className="card-text">Hours: {hours.startTime}-{hours.endTime}</p>
-                  {/* <Button onClick={() => { sendEmailToCheck( date, dayOfWeek, hours.startTime, hours.endTime) }}>
-                Check Appointment <Clock /></Button> */}
-                {/* //add title */}
                 </div>
               </div>
 

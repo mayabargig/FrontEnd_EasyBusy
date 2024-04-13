@@ -1,4 +1,4 @@
-.toggle-container {
+/* .toggle-container {
     position: absolute;
     top:2rem;
     right: 2rem;
@@ -39,4 +39,4 @@
 
 .toggle:checked + label::after{
     transform: translateX(100%);
-}
+} */

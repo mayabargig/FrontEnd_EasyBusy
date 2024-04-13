@@ -12,12 +12,15 @@ export default function Appointments() {
     const { user } = useContext(UserContext);
     const [isClick, setClick] = useState(false);
     const [value, onChange] = useState(new Date());
-    // const myCalendar = React.useRef();
     const [appointments, setAppointments] = useState([]);
     const [appointmentsDay, setAppointmentsDay] = useState([]);
     const businessStartTime = '09:00';
     const businessEndTime = '17:00';
     const [date, setDate] = useState({});
+
+    //TODO:
+    // add addition appointment after check 
+    //css to the page
 
     useEffect(() => {
         if (value)
@@ -64,8 +67,6 @@ export default function Appointments() {
     };
 
     const sendEmailToCheck = async ( newDate, dayOfWeek, startTime, endTime) => {
-        // console.log(item,newDate,dayOfWeek);
-        // add title
         try {
             const response = await fetch(`${APIBaseUrl}/appointment/sendEmail`, {
                 method: 'POST',
@@ -105,9 +106,10 @@ export default function Appointments() {
                     <div id='calenderDiv'>
                         <h1>Appointment</h1>
                         <h3> Opening Hours: {businessStartTime}-{businessEndTime}</h3>
-                        {/* <div id='card'> */}
-                        <Calendar onChange={onChange} value={value} />
-                        {/* </div> */}
+                        <div id='card'>
+                        <Calendar className="dark:text-white dark:bg-black" style={{ border:"1.5px solid white", boxShadow:"1px 2px 3px 2px white"}}
+                        onChange={onChange} value={value} />
+                        </div>
                         {/* <CalenderComponents value={value.toJSON().substring(0,10)} /> */}
                         <button onClick={addLink} type="button" className="btn btn-primary">
                             {isClick ? "Cancel" : "Add Appointment"}</button>

@@ -1,4 +1,7 @@
-*{
+@import './tailwind.css';
+/* @import './darkmode.css'; */
+
+* {
   margin: 0;
   padding: 0;
 }
@@ -8,7 +11,16 @@ a {
   text-decoration: inherit;
 }
 
-.light-theme{
+.app-text-color {
+  color: black;
+}
+
+.app-background-color {
+  background-color: white;
+}
+
+
+/* .light-theme{
   font-family: 'Anton', sans-serif;
   --background-color:#f6f6f6;
   --primary-text-color:#0a0a0a;
@@ -24,4 +36,66 @@ a {
   --secondary-text-color:#0a0a0a;
   --toggle-bg:#283452;
   --toggle-bg:#00a6ff;
+} */
+/* 
+.labelTheme{
+  width: 80px;
+  height: 80px;
+  background-color:#2b2b2b;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.inputTheme{
+  position: absolute;
+  opacity: 0;
+}
+
+.sun{
+  position: absolute;
+  width: 8em;
+  height: 8em;
+   font-size: 30em; 
+  color: #f8f8f8;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.5));
+  transform: scale(0);
+  transition: 1s ease;
+}
+
+.inputTheme:checked~.sun{
+  transition-delay: .8s;
+  transform: scale(1) rotate(360deg) ;
+}
+
+.moon{
+  font-size: 30em;
+  color: #f8f8f8;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.5));
+  transition: 1s ease;
+  transition-delay: .8s;
+}
+
+.inputTheme:checked>.moon{
+  transform: rotate(360deg) scale(0);
+}
+
+.toggleTheme{
+  position: absolute;
+  /* display: block; 
+  width: 80px;
+  height: 80px;
+  background-color: #2b2b2b;
+  border-radius: 50%;
+  box-shadow: 
+  inset 0 8px 60px rgba(0,0,0,.1),
+  inset 0 8px 8px rgba(0,0,0,.1),
+  inset 0 -4px 4px rgba(0,0,0,.1);
+  z-index: -1;
+}
+
+.inputTheme:checked> .toggleTheme{
+  background: #f8f8f8;
+} */

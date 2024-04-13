@@ -13,6 +13,9 @@ function HomeSingleEl (){
     console.log(params.id);
     const [isLiked, setLiked] = useState();
 
+    //TODO:
+    //fixed liked button
+
     const getProduct = async()=>{
         try{
             const res= await fetch(`${APIBaseUrl}/products/${params.id}`)

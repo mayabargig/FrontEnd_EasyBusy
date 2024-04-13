@@ -1,9 +1,10 @@
-import {React,  useState, useEffect } from 'react'
+import {React,  useState, useEffect, useContext } from 'react'
 import { APIBaseUrl } from '../config/index';
 import CartCard from '../components/CartCard';
+import { UserContext } from '../context/User';
 
-export default function Cart(props) {
-    const { loading, cart,setCart, getCarts } = props;
+export default function Cart() {
+    const { user, SingOutClick, token, cartCount, getCarts, setCart, loading, cart}=useContext(UserContext);
 
   useEffect(()=>{
     getCarts();
@@ -21,6 +22,7 @@ export default function Cart(props) {
               return item.id !== id;
             });
             setCart([...filtered]);
+            getCarts();
           }
         } catch (error) {
           console.log(error);

@@ -1,29 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-/* @media screen and (max-width: 600px) {
-  .nav-menu {
-    flex-direction: column;
-  }
+
+/* *{
+  margin: 0;
+  padding: 0;
 }
 
-@media screen and (min-width: 600px) {
-  .nav-menu {
-    flex-direction: row;
-  }
+a {
+  color: black;
+  text-decoration: inherit;
 } */
 
 .App{
   width: 100%;
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  background-color: var(--background-color);
-  transition: background-color 0.25ms ease-in-out;
+  /* background-color: var(--background-color);
+  transition: background-color 0.25ms ease-in-out; */
 }
 
 .title{
-  color: var(--primary-text-color);
+  /* color: var(--primary-text-color); */
 }
 
 #root {
@@ -41,7 +40,7 @@
   margin: 2px auto; 
   border: solid 1.5px black;
   border-radius: 5px;
-  box-shadow: 0 7px 10px rgba(0, 0, 0.2, 0.8); 
+  box-shadow: 0 7px 10px rgba(0, 0.2, 0.4, 0.8); 
   text-align: center; 
   overflow: hidden;
   width: 100%;
@@ -61,7 +60,6 @@
 
 .productCard{
   max-width: 150px;
-  /* margin: 20px; */
   min-width: 100px;
   gap: 1rem;
 }
@@ -134,11 +132,40 @@
   left: 220px;
 }
 
-#card{
+.card{
   display: grid;
   place-items: center;
   height: 100%;
-  margin: 20px;
+  /* margin: 20px; */
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s;
+  transform-style: preserve-3d; /* Ensure child elements maintain their 3D position */
+  perspective: 1000px; /* Set the perspective for the 3D effect */
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, transparent 50%, rgba(255, 255, 255, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+  pointer-events: none; /* Ensure the pseudo-element doesn't interfere with hover events on the card */
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Move the card 5px upwards on hover */
 }
 
 .penEdit{
@@ -146,7 +173,12 @@
   cursor: pointer;
   left: 25px;
   top: 25px;
-  color: white;
+  /* color: white; */
+}
+
+.mb-3{
+  padding: 0;
+  margin: 0;
 }
 
 .AppointmentContainer{
@@ -189,3 +221,37 @@
  #available:hover{
   transform: scale(1.04)
  }
+
+ #divHomeCardEdit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+ }
+
+ .AddProductCard{
+  margin: 3rem;
+  border: #fff solid 2.5px;
+  box-shadow: 4px 7px 8.5px 4px rgba(255, 255, 245, 0.858); 
+  border-radius: 2% ;
+ }
+
+ .btn-light {
+  color: white !important;
+}
+ 
+.btn-danger{
+  background-color: red !important;
+}
+
+.btn-danger:hover, .btn-primary:hover, .btn-warning:hover{
+  color: black !important;
+}
+
+.btn-primary{
+  background-color: blue !important;
+}
+
+.btn-warning{
+  background-color: orange !important;
+}

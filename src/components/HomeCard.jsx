@@ -1,4 +1,4 @@
-import {React, useContext, useState} from 'react'
+import {React, useContext, useEffect, useState} from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { PhoneVibrate, Heart, SendCheck, Trash3Fill, HeartFill, Cart} from "react-bootstrap-icons"
@@ -6,25 +6,42 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { APIBaseUrl } from '../config';
 import { UserContext } from '../context/User';
+import axios from 'axios';
 
 export default function HomeCard(props) {
-  const { user } = useContext(UserContext);
-  const [isLiked, setLiked] = useState();
-  const [favorites, setFavorites] = useState([]);
+  const { user , getCarts, favorites, getFavorites, deleteFav } = useContext(UserContext);
+  const [isLiked, setLiked] = useState(true);
   const [cart, setCart] = useState([]);
   const {item, setProducts, products}= props;
 
+  useEffect(()=>{
+    getCarts();
+    getFavorites();
+    if(favorites){
+      isProductLiked();
+    }
+  },[]);
+
+  const isProductLiked = ()=>{
+    favorites.map((fav)=>{
+      if(fav.product === item._id){
+        setLiked(false);
+      }
+    })
+    console.log(isLiked);
+  }
+
     const clickFav = (id)=>{
-      // console.log(id);
-      const isLike = !favorites?.includes(id);
-      // console.log(isLike);
+      console.log(id);
+      console.log(item);
       
-      if(isLike){
+      if(isLiked){
           setLiked(false);
-          console.log(isLike);
           addFavProduct(id, user);
       }else{
           setLiked(true);
+          //TODO: //need to make function that delete the product from favorites by id
+          deleteFavByProId(id, user); 
       }
       toggleMode();
   };
@@ -45,8 +62,7 @@ export default function HomeCard(props) {
           body:JSON.stringify({product:productId, userId:user.id})
         });
         const data= await res.json();
-        setFavorites([...favorites,data.data]);
-        // console.log(data);
+        isProductLiked();
       }
       catch(error){
         console.log(error);
@@ -66,7 +82,7 @@ export default function HomeCard(props) {
       });
       const data= await res.json();
       setCart([...cart,data.data]);
-      // console.log(data);
+      getCarts();
     }
     catch(error){
       console.log(error);
@@ -90,11 +106,25 @@ export default function HomeCard(props) {
     }
   }
 
+  const deleteFavByProId = async (productId, user) => {
+    console.log(user.id);
+    console.log(productId);
+    try {
+        const res = await axios.delete(`${APIBaseUrl}/favorites/delete/${user.id}/${productId}`);
+        console.log(res.data);
+        getFavorites();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
   return (
     item?(
 
     <div className='productCard'>
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '18rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black" }} 
+      className=' dark:text-white dark:bg-black'>
       <div className='divHearts'>
           <div>
           {
@@ -123,16 +153,16 @@ export default function HomeCard(props) {
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item> {item.price} $</ListGroup.Item>
-        <ListGroup.Item>Category: {item.category}</ListGroup.Item>
+        <ListGroup.Item className=' dark:text-white dark:bg-black'> {item.price} $</ListGroup.Item>
+        <ListGroup.Item className=' dark:text-white dark:bg-black'>Category: {item.category}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-      <Button variant="primary">
+      <Button variant="primary" className='btn-primary'>
             <Link to={`/products/${item.id}`} className="GoToLink" >
             See More <SendCheck/>
             </Link>
           </Button>
-          <button onClick={()=>addProductToCart(item.id)}type="button" className="btn btn-outline-danger">
+          <button onClick={()=>addProductToCart(item.id)} type="button" className="btn btn-danger">
              Add To Card <Cart/></button>
       </Card.Body>
     </Card>

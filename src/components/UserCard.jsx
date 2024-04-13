@@ -7,26 +7,29 @@ import { Link } from 'react-router-dom';
 
 export default function UserCard() {
     const { user }=useContext(UserContext);
-    // console.log(user);
-    // const [user, setUser] = useState({gender:"male"})
-    useEffect(()=>{
 
+    //TODO: 
+    //add option to upload profile image and change
+
+    useEffect(()=>{
     },[])
 
   return (
-    <div>
-    <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
-    <MDBContainer className="py-5 h-100">
+    <div className='dark:text-white dark:bg-black  !important'>
+    <section className='vh-100 dark:text-white important! dark:bg-black important!'>
+    <MDBContainer className='dark:text-white dark:bg-black !important' >
       <MDBRow className="justify-content-center align-items-center h-100">
         <MDBCol lg="6" className="mb-4 mb-lg-0">
-          <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
+            {/* <div className='dark:text-white dark:bg-black !important'> */}
+          <MDBCard className="mb-3 dark:text-white dark:bg-black" style={{ borderRadius: '.5rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black"}}>
             <MDBRow className="g-0">
               <MDBCol md="4" className="gradient-custom text-center text-white"
-                style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
-                   <Link to={`/profile/edit`}  className="penEdit" >
-                  <PencilSquare/>
+                style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem'}}
+                >
+                   <Link to={`/profile/edit`}  className="penEdit dark:text-white dark:bg-black !important" >
+                  <PencilSquare cla />
                   </Link>
-                    <div> 
+                    <div style={{display:'flex', alignItems: 'center', justifyContent:'center' }}> 
                         {(
                             (user.gender === "female")?(
                                 <MDBCardImage 
@@ -48,37 +51,41 @@ export default function UserCard() {
                 <MDBIcon far icon="edit mb-5" />
               </MDBCol>
               <MDBCol md="8">
+                  <div className='dark:text-white dark:bg-black'>
                 <MDBCardBody className="p-4">
+
                   <MDBTypography tag="h6">Contact Information <InfoCircle/></MDBTypography>
                   <hr className="mt-0 mb-4" />
                   <MDBRow className="pt-1">
                     <MDBCol size="6" className="mb-3">
                       <MDBTypography tag="h6">Email</MDBTypography>
-                      <MDBCardText className="text-muted"><EnvelopeAt/> {user.email} </MDBCardText>
+                      <MDBCardText className="dark:text-white"><EnvelopeAt/> {user.email} </MDBCardText>
                     </MDBCol>
                     <MDBCol size="6" className="mb-3">
                       <MDBTypography tag="h6">Phone </MDBTypography>
-                      <MDBCardText className="text-muted"><Telephone/> {user.telephone}</MDBCardText>
+                      <MDBCardText className="dark:text-white"><Telephone/> {user.telephone}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
 
                   <MDBTypography tag="h6">Location <GeoAlt/></MDBTypography>
                   <hr className="mt-0 mb-4" />
                   <MDBRow className="pt-1">
-                      <MDBTypography tag="h6">{user.address.country} , {user.address.city}</MDBTypography>
-                      <MDBCardText className="text-muted">{user.address.street} \ {user.address.apartment}</MDBCardText>
+                      <MDBTypography className="dark:text-white" tag="h6">{user.address.country} , {user.address.city}</MDBTypography>
+                      <MDBCardText className="dark:text-white">{user.address.street} \ {user.address.apartment}</MDBCardText>
                   </MDBRow><br></br>
 
                   <div className='divIcons'>
-                    <a href="#!"><Facebook /></a>
-                    <a href="#!"><Twitter /></a>
-                    <a href="#!"><Instagram /></a>
-                    <a href="#!"><Whatsapp /></a>
+                    <a className="dark:text-white" href="#!"><Facebook /></a>
+                    <a className="dark:text-white" href="#!"><Twitter /></a>
+                    <a className="dark:text-white" href="#!"><Instagram /></a>
+                    <a className="dark:text-white" href="#!"><Whatsapp /></a>
                   </div>
                 </MDBCardBody>
+                  </div>
               </MDBCol>
             </MDBRow>
           </MDBCard>
+            {/* </div> */}
         </MDBCol>
       </MDBRow>
     </MDBContainer>

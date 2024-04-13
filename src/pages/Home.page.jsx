@@ -31,7 +31,7 @@ export default function Home() {
 
   console.log(products);
   return (
-    <div>
+    <div className=' dark:text-white dark:bg-black'>
       {isClick?(
         <HomeCardEdit setProducts={setProducts} products={products} addLink={addLink}/>
         ):(
@@ -39,7 +39,7 @@ export default function Home() {
             <h1>All My Products...
               {
               user.role === "regular"?(
-                <button onClick={addLink}type="button" className="btn btn-light" title='Add Product'> <PlusCircleFill/></button>
+                <button onClick={addLink}type="button" className="btn btn-light important!" title='Add Product'> <PlusCircleFill/></button>
               ):null 
               }
             </h1>

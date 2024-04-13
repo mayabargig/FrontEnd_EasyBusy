@@ -12,13 +12,10 @@ export default function CartCard(props) {
     const [singCart, setSingCart] = useState({});
     const [cartP, setCartP] = useState([]);
     const { user } = useContext(UserContext);
-    // console.log(item);
 
     useEffect(()=>{
-        if(item.userId===user.id){
             getCart();
-        }
-      },[cart]);
+      },[]);
 
       const getCart = async () => {
         try {
@@ -29,7 +26,7 @@ export default function CartCard(props) {
             const data = await res.json();
             console.log(data);
             setSingCart({data:data, id:item._id});
-            setCartP((prevFavorites) => [...prevFavorites, data, {id:item._id}]);
+            // setCartP((prevFavorites) => [...prevFavorites, data, {id:item._id}]);
         }
         } catch (error) {
             setSingCart([null])
@@ -38,16 +35,14 @@ export default function CartCard(props) {
     };
 
   return (
-      (singCart.data)&&(item.userId===user.id)?(
-      <div className='productCard'>
+      singCart.data?(
+      <div className='productCard  dark:text-white dark:bg-black' >
         {
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black" }} 
+                className=' dark:text-white dark:bg-black'>
                 <div className='divHearts'>
                     <div>
                     </div>
-                    {/* <div>
-                      <Trash3Fill className='removeBtn'/>
-                    </div> */}
                 </div>
                   {
                       singCart.data.imgSrc?
@@ -60,14 +55,10 @@ export default function CartCard(props) {
                   }
                 <Card.Body>
                   <Card.Title>{singCart.data.title}</Card.Title>
-                  {/* <Card.Text>
-                    For Details Call
-                     052-8612326 <PhoneVibrate/>
-                  </Card.Text> */}
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  <ListGroup.Item> {singCart.data.price} $</ListGroup.Item>
-                  <ListGroup.Item>Category: {singCart.data.category}</ListGroup.Item>
+                  <ListGroup.Item className='  dark:text-white dark:bg-black'> {singCart.data.price} $</ListGroup.Item>
+                  <ListGroup.Item className='  dark:text-white dark:bg-black'>Category: {singCart.data.category}</ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
                 <Button variant="primary">
@@ -75,7 +66,7 @@ export default function CartCard(props) {
                       See More <SendCheck/>
                       </Link>
                     </Button>
-                    <button onClick={()=>deleteFromCard(singCart.id)}type="button" className="btn btn-outline-danger">
+                    <button onClick={()=>deleteFromCard(singCart.id)}type="button" className="btn btn-danger">
             Remove <Cart/></button>
                 </Card.Body>
               </Card>

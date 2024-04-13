@@ -6,9 +6,11 @@ export const UserContext = createContext({});
 
 export default function UserProvider({children}) {
     const [user, setUser] = useState();
-    console.log(user);
     const token = localStorage.getItem("user_token");
-
+    const [cartCount, setCartCount] = useState(0);
+    const [cart, setCart] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [favorites, setFavorites] = useState([]);
     
     const getUser = async()=>{
       console.log(token);
@@ -26,6 +28,8 @@ export default function UserProvider({children}) {
     }
     useEffect(()=>{
       getUser();
+      getCarts();
+      getFavorites();
     },[]);
     
     const SingOutClick = () => {
@@ -37,9 +41,50 @@ export default function UserProvider({children}) {
         alert("User Still Connected!");
       }
     };
+
+    const getCarts = async () => {
+      try {
+        const res = await axios.get(`${APIBaseUrl}/cart/${user.id}`);
+        console.log(res.data);
+        setCart(res.data);
+        setCartCount(res.data.length)
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false)
+    }
+
+    const getFavorites =async ()=>{
+      try{
+        const res = await axios.get(`${APIBaseUrl}/favorites/user/${user.id}`);
+        setFavorites(res.data);
+      }catch(error){
+        console.log(error);
+      }
+    }
+
+    const deleteFav = async(id)=>{
+      console.log(id);
+      try {
+        const res = await axios(`${APIBaseUrl}/favorites/${id}`, {
+          method:"DELETE"
+        });
+        if(res.status === 200){
+          const filtered = favorites.filter((item)=>{
+            return item.id !== id;
+          });
+          setFavorites([...filtered]);
+          getFavorites();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   
     return (
-      <UserContext.Provider value={{ token, user, setUser, SingOutClick }}>
+      <UserContext.Provider value={{ token, user, setUser, SingOutClick, getCarts,
+       cart, cartCount, setCart, loading, favorites, setFavorites, getFavorites, deleteFav}}>
         {children}
       </UserContext.Provider>
   );

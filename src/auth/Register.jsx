@@ -17,7 +17,7 @@ function Register(props){
     }
 
     return (
-        <Form id="singUpForm" onSubmit={handelSubmit} name='email'>
+        <Form id="singUpForm" onSubmit={handelSubmit} name='email' className=' dark:text-white dark:bg-black'>
             <h2>SingUp Page:</h2>
             <Row>
                 <Col>

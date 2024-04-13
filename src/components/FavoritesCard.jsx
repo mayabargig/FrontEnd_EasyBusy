@@ -8,19 +8,20 @@ import { APIBaseUrl } from '../config';
 import { UserContext } from '../context/User';
 
 export default function FavoritesCard(props) {
+  const { favorites, getFavorites, deleteFav} = useContext(UserContext);
     const [isLiked, setLiked] = useState(true);
     const [fav, setFav] = useState([null]);
-    const [favs, setFavs] = useState([]);
-    const { user } = useContext(UserContext);
-    const {item, favorites, setFavorites, deleteFav}= props;
+    const {item}= props;
 
   console.log(item);
-    // console.log(item.userId, user.id);
+
     useEffect(()=>{
-        if(item.userId===user.id){
             getFavPro();
-        }
       },[favorites]);
+
+      useEffect(()=>{
+        getFavorites();
+  },[]);
 
     const getFavPro = async () => {
         try {
@@ -30,25 +31,16 @@ export default function FavoritesCard(props) {
             const res = await fetch(`${APIBaseUrl}/products/${item.product}/`);
             const data = await res.json();
                 setFav({data:data, id:item._id});
-                setFavs((prevFavorites) => [...prevFavorites, data, {id:item._id}]);
         }
         } catch (error) {
             setFav([null])
             console.log(error);
         }
     };
-// console.log(favs);
-    //   console.log(fav);
 
       const clickFav = (id)=>{
-        // console.log(id);
-        // const isLike = !favorites?.includes(id);
-        // console.log(isLiked);
-        
         if(isLiked){
             setLiked(false);
-            // console.log(isLike);
-            // addFavProduct(id, user);
             deleteFav(id);
         }else{
             setLiked(true);
@@ -61,10 +53,11 @@ export default function FavoritesCard(props) {
       };
 
   return (
-          (fav.data)&&(item.userId===user.id)?(
+          fav.data?(
       <div className='productCard'>
         {
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black" }} 
+                className=' dark:text-white dark:bg-black'>
                 <div className='divHearts'>
                     <div>
                     {
@@ -93,11 +86,11 @@ export default function FavoritesCard(props) {
                   </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  <ListGroup.Item> {fav.data.price} $</ListGroup.Item>
-                  <ListGroup.Item>category</ListGroup.Item>
+                  <ListGroup.Item className=' dark:text-white dark:bg-black'> {fav.data.price} $</ListGroup.Item>
+                  <ListGroup.Item className=' dark:text-white dark:bg-black'>category</ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
-                <Button variant="primary">
+                <Button variant="primary" className='btn-primary'>
                       <Link to={`/products/${fav.data.id}`} className="GoToLink" >
                       See More <SendCheck/>
                       </Link>

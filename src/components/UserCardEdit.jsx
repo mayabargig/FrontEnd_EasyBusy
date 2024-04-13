@@ -13,9 +13,8 @@ export default function UserCardEdit() {
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   updateUser();
-  // },[user])
+  //TODO:
+  //to add links to contact:facebook and more..
 
   const handleInputChange = (name, value) => {
     setFormData(user);
@@ -27,12 +26,9 @@ export default function UserCardEdit() {
     } else {
         setFormData(prev => ({ ...prev, [name]: value }));
     }
-    // updateUser();
 };
 
 const updateUser =async ()=>{
-  console.log(formData);
-    // console.log(user.id);
 
     try {
       const res = await fetch(`${APIBaseUrl}/users/${user.id}`, {
@@ -52,9 +48,9 @@ const updateUser =async ()=>{
   }
 
   return (
-    <div>
+    <div className='dark:text-white dark:bg-black'>
       <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
-    <MDBContainer className="py-5 h-100">
+    <MDBContainer className='dark:text-white dark:bg-black'>
       <MDBRow className="justify-content-center align-items-center h-100">
         <MDBCol lg="6" className="mb-4 mb-lg-0">
           <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
@@ -97,6 +93,7 @@ const updateUser =async ()=>{
                 <MDBIcon far icon="edit mb-5" />
               </MDBCol>
               <MDBCol md="8">
+              <div className='dark:text-white dark:bg-black'>
                 <MDBCardBody className="p-4">
                   <MDBTypography tag="h6">Contact Information <InfoCircle/></MDBTypography>
                   <hr className="mt-0 mb-4" />
@@ -147,20 +144,20 @@ const updateUser =async ()=>{
                   </MDBRow><br></br>
 
                   <div className='divIcons'>
-                    <a href="#!"><Facebook /></a>
-                    <a href="#!"><Twitter /></a>
-                    <a href="#!"><Instagram /></a>
-                    <a href="#!"><Whatsapp /></a>
+                  <a className="dark:text-white" href="#!"><Facebook /></a>
+                    <a className="dark:text-white" href="#!"><Twitter /></a>
+                    <a className="dark:text-white" href="#!"><Instagram /></a>
+                    <a className="dark:text-white" href="#!"><Whatsapp /></a>
                   </div>
+                  <br></br>
                         <div>
-                        {/* <Link to={`/profile`}> */}
                   <button onClick={updateUser} type="button" className="btn btn-primary">Update</button>
-                  {/* </Link> */}
                   <Link to={`/profile`}>
                   <button type="button" className="btn btn-danger">Cancel</button>
                     </Link>
                         </div>
                 </MDBCardBody>
+                </div>
               </MDBCol>
             </MDBRow>
           </MDBCard>

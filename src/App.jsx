@@ -11,67 +11,74 @@ import Appointments from './pages/Appointments';
 import { UserContext } from './context/User';
 import UserCardEdit from './components/UserCardEdit';
 import Cart from './pages/Cart';
-import { APIBaseUrl } from './config';
+import ThemeBtn from './context/ThemeBtn';
+import { ThemeProvider } from './context/Theme';
+// import { Toggle } from './toggle/Toggle';
+import useLocalStorage from 'react-use-localstorage';
 
 function App() {
-  const { user, token } = useContext(UserContext);
+  const { user, getCarts } = useContext(UserContext);
   const [isUserLog, setUserLog] = useState([]);
-  const [cartCount, setCartCount]= useState();
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [themeMode, setThemeMode] = useState('light');
 
   useEffect(()=>{
     getCarts();
-  },[])
+  },[]);
 
-  const getCarts =async ()=>{
-    fetch(`${APIBaseUrl}/cart`)
-    .then(res=> res.json())
-    .then(res=>{
-      setCart(res);
-      setCartCount(res.length)
-      setLoading(false);
-    })
-    .catch(err=> console.log(err))
-    setLoading(false)
+  const darkTheme = () => {
+    setThemeMode('dark')
   }
 
+  const lightTheme = () => {
+    setThemeMode('light')
+  }
+
+  useEffect(() => {
+    document.querySelector('html').classList.remove('dark', 'light')
+    document.querySelector('html').classList.add(themeMode)
+  }, [themeMode]);
+
   return (
-    <Router>
-      <NavBar cartCount={cartCount} getCarts={getCarts}/>
-      {
-        user ?
+    <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
+      <Router>
+        {/* <Toggle/> */}
+        {/* <div  className=' dark:text-white dark:bg-black'   > dark</div> */}
+        {/* <div  className=' dark:bg-black dark:text-white'></div>  */}
+          <ThemeBtn />
+        <NavBar themeMode={themeMode}/>
+        {
+          user ?
           <Routes>
-            <Route path='/home' element={<Home
-            />} />
+              <Route path='/home' element={<Home
+              />} />
 
-            <Route path='/products/:id' element={<HomeSingleEl
-            />} />
+              <Route path='/products/:id' element={<HomeSingleEl
+              />} />
 
-            <Route path='/profile/edit' element={<UserCardEdit
-                        />} />
+              <Route path='/profile/edit' element={<UserCardEdit
+              />} />
 
-            <Route path='/profile' element={<User
-            />} />
+              <Route path='/profile' element={<User
+              />} />
 
-            <Route path='/favorites' element={<Favorites
-            />} />
-            <Route path='/appointment' element={<Appointments
-            />} />
-            <Route path='/cart' element={<Cart loading={loading} cart={cart}
-            setCart={setCart} getCarts={getCarts}
-            />} />
-            <Route path='*' element={<Home />} />
-          </Routes>
-          :
-          <Routes>
-            <Route path='*' element={<Auth
-              isUserLog={isUserLog} setUserLog={setUserLog} />} />
-            {/* <Route path='auth/login' element={<Login/>} />
+              <Route path='/favorites' element={<Favorites
+              />} />
+              <Route path='/appointment' element={<Appointments
+              />} />
+              <Route path='/cart' element={<Cart
+                />} />
+              <Route path='*' element={<Home />} />
+            </Routes>
+            :
+            <Routes>
+              <Route path='*' element={<Auth themeMode={themeMode}
+                isUserLog={isUserLog} setUserLog={setUserLog} />} />
+              {/* <Route path='auth/login' element={<Login/>} />
             <Route path='auth/register' element={<Register />} /> */}
-          </Routes>
-      }
-    </Router>
+            </Routes>
+        }
+      </Router>
+    </ThemeProvider>
   )
 }
 

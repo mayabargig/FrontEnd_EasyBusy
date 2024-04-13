@@ -128,62 +128,62 @@ export default function AppointmentCardEdit(props) {
 
 
     return (
-        <div id='tableContainer'>
-            <div>
+        <div id='tableContainer' className=' dark:text-white dark:bg-black'>
+            <div style={{display:'flex', justifyContent:'center'}}>
             <button onClick={addClick} type="button" className="btn btn-primary">Add</button>
-            <button onClick={addLink} type="button" className="btn btn-warning">Go Back <ArrowLeftSquare /></button>
+            <button style={{display:'flex', flexDirection:'row'}} onClick={addLink} type="button" className="btn btn-warning">Back <ArrowLeftSquare /></button>
             </div>
             {
                 (appointments) ? (
 
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Appointment</th>
-                                <th>Date</th>
-                                <th>Start Time</th>
-                                <th>End Time </th>
+                    <Table striped bordered hover className=' dark:text-white dark:bg-black'>
+                        <thead className=' dark:text-white dark:bg-black'>
+                            <tr className=' dark:text-white dark:bg-black'>
+                                <th className=' dark:text-white dark:bg-black'>Appointment</th>
+                                <th className=' dark:text-white dark:bg-black'>Date</th>
+                                <th className=' dark:text-white dark:bg-black'>Start Time</th>
+                                <th className=' dark:text-white dark:bg-black'>End Time </th>
                                 {
                                     isAdmin ? (
-                                        <th>Client Name</th>
+                                        <th className=' dark:text-white dark:bg-black'>Client Name</th>
                                     ) : null
                                 }
-                                <th>Actions</th>
+                                <th className=' dark:text-white dark:bg-black'>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {appointments.map((appointment) => { 
-                                return <tr key={appointment._id}>
-                                    <td 
+                                return <tr key={appointment._id} className=' dark:text-white dark:bg-black'>
+                                    <td className=' dark:text-white dark:bg-black'
                                     contentEditable={editableId===appointment.id}
                                     onBlur={(e) => handleBlur("title", e.target.innerText)}
                                     >
                                         {appointment.title}</td>
-                                    <td
+                                    <td className=' dark:text-white dark:bg-black'
                                      contentEditable={editableId===appointment.id}
                                      onBlur={(e) => handleBlur("date", e.target.innerText)}
                                     >
                                         {appointment.date}</td>
-                                    <td
+                                    <td className=' dark:text-white dark:bg-black'
                                      contentEditable={editableId===appointment.id}
                                      onBlur={(e) => handleBlur("timeSlot.start", e.target.innerText)}
                                      >
                                         {appointment.timeSlot.start}</td>
-                                    <td
+                                    <td className=' dark:text-white dark:bg-black'
                                      contentEditable={editableId===appointment.id}
                                      onBlur={(e) => handleBlur("timeSlot.end", e.target.innerText)}
                                      >
                                         {appointment.timeSlot.end}</td>
                                     {
                                         isAdmin ? (
-                                            <td
+                                            <td className=' dark:text-white dark:bg-black'
                                             contentEditable={editableId===appointment.id}
                                             onBlur={(e) => handleBlur("userName", e.target.innerText)}
                                             >
                                                 {appointment.userName}</td>
                                         ) : null
                                     }
-                                    <td>
+                                    <td className=' dark:text-white dark:bg-black'>
                                         {isAdmin && editableId !== appointment.id ? (
                                             <Button onClick={() => handleEdit(appointment.id)}>Edit <PencilSquare /></Button>
                                         ) : editableId === appointment.id ? (
@@ -198,21 +198,21 @@ export default function AppointmentCardEdit(props) {
                             )}
                         </tbody>
                         {isClick ? (
-                            <tbody>
-                                <tr>
-                                    <td><Input placeholder='Title' name="title"
+                            <tbody className=' dark:text-white dark:bg-black'>
+                                <tr className=' dark:text-white dark:bg-black'>
+                                    <td className=' dark:text-white dark:bg-black'><Input placeholder='Title' name="title"
                                         onChange={(e) => handleInputChange("title", e.target.value)} /></td>
-                                    <td><Input placeholder='Date' name="date" type="date"
+                                    <td className=' dark:text-white dark:bg-black'><Input placeholder='Date' name="date" type="date"
                                         onChange={(e) => handleInputChange("date", e.target.value)} /></td>
-                                    <td>
+                                    <td className=' dark:text-white dark:bg-black'>
                                         <TimePicker defaultValue={dayjs('00:00', format)} format={format} onChange={(value) => handleInputChange('timeSlot.start', value.format(format))} />
                                     </td>
-                                    <td>
+                                    <td className=' dark:text-white dark:bg-black'>
                                         <TimePicker defaultValue={dayjs('00:00', format)} format={format} onChange={(value) => handleInputChange('timeSlot.end', value.format(format))} />
                                     </td>
-                                    <td><Input placeholder='Client Name' name="userName"
+                                    <td className=' dark:text-white dark:bg-black'><Input placeholder='Client Name' name="userName"
                                         onChange={(e) => handleInputChange("userName", e.target.value)} /></td>
-                                    <td>
+                                    <td className=' dark:text-white dark:bg-black'>
                                         <Button onClick={addAppointments}>Add</Button>
                                         <Button onClick={addClick}>Cancel</Button>
                                     </td>
