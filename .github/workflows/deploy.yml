@@ -33,11 +33,11 @@ jobs:
         with:
           node-version: 'latest'
 
-      - name: Create .env file
-        run: echo "VITE_EASY_BUSY_BACKEND__URL=${{ secrets.SERVER_URL }}" > .env.production
-
       - name: Install dependencies
         run: npm install
+
+      - name: Create .env file
+        run: echo "VITE_EASY_BUSY_BACKEND__URL=${{ secrets.SERVER_URL }}" > .env.production
 
       - name: Build project
         run: npm run build  # Adjust this if your build command is different
