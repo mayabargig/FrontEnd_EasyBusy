@@ -16,11 +16,11 @@ export default defineConfig({
   // sourcemap: true,
   build: {
     rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          return assetInfo?.name?.replace('assets/', '')
-        },
-      },
+      // output: {
+      //   assetFileNames: (assetInfo) => {
+      //     return assetInfo?.name?.replace('assets/', '')
+      //   },
+      // },
     }
   }
 });
