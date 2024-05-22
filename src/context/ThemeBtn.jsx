@@ -1,4 +1,3 @@
-import React from 'react'
 import useTheme from './Theme'
 
 export default function ThemeBtn() {
@@ -15,9 +14,9 @@ export default function ThemeBtn() {
 
 
   return (
-<div className="flex flex-col justify-center ml-3">
+<div className="">
 
-  <label style={{margin:"0.5rem", padding:"0", width:"2rem", height:"2rem"}} className='relative inline-flex items-center cursor-pointer'>
+  <label style={{margin:"0rem", padding:"0"}} className='relative inline-flex items-center cursor-pointer'>
     <input
     type='checkbox'
     value=""
@@ -33,20 +32,6 @@ export default function ThemeBtn() {
             <path className="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z" />
             <path className="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z" />
         </svg>
-    {/* <div className="absolute left-10 bottom-0 w-11 h-6 bg-gray-200 
-    peer-focus:outline-none peer-focus:ring-4
-    peer-focus:ring-blue-300
-    dark:peer-focus:ring-blue-800 rounded-full peer
-    dark:bg-gray-700
-    peer-checked:after:translate-x-full
-    peer-checked:after:border-white after:content-
-    [''] after:absolute after:top-[2px] after:left-
-    [-2px] after:bg-white after:border-gray-300
-    after:border after:rounded-full after:h-5
-    after:w-5 after:transition-all
-    dark:border-gray-600 peer-checked:bg-blue-600"></div>  */}
-    <span className="ml-3 text-sm font-medium
-    text-gray-900"></span>
   </label>
 </div>
   )

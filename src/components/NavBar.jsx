@@ -1,24 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react'
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { HouseGear,Calendar, BookmarkHeart, BoxArrowRight,BookmarkHeartFill, Clock, Cart, PersonCircle } from "react-bootstrap-icons"
+import { HouseGear,Calendar ,BookmarkHeartFill, Cart, PersonCircle } from "react-bootstrap-icons"
 import "./NavBar.css"
 import { UserContext } from '../context/User';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import EasyBusyicon from '../images/EasyBusyicon.png'
-// import { Toggle } from '../toggle/Toggle';
 import '../toggle/Toggle.css'
+import ThemeBtn from '../context/ThemeBtn';
 
 export default function NavBar(props) {
   const { user, SingOutClick, token, cartCount, getCarts }=useContext(UserContext);
   const [menu, setMenu]= useState("shop");
+  const [lengthCart, setLengthCart] = useState()
   const { themeMode} = props;
 
   useEffect(()=>{
-    getCarts();
-  },[]);
+    setLengthCart(cartCount);
+  },[cartCount]);
 
   return (
     <div className=' dark:text-white dark:bg-black'>
@@ -28,6 +28,15 @@ export default function NavBar(props) {
             className={themeMode === "dark" ? "navbar navbar-dark bg-dark" 
             : "navbar navbar-light"} >
           <Container>
+          <button
+                        type="button"
+                        className="relative rounded-full p-1 m-3 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800  dark:text-white dark:bg-black"
+                        >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <ThemeBtn aria-hidden="true" />
+                      </button>
+          {/* <ThemeBtn className='p-4'/> */}
           <Navbar.Brand href="#home">
             <img src={EasyBusyicon} style={{ width: '3rem', height: '3rem' }}/>
             <p>EasyBusy</p>
@@ -53,12 +62,10 @@ export default function NavBar(props) {
                 {menu==="favorites"?<hr></hr>:<></>}
                 </li>
                 <li onClick={()=>{setMenu("cart")}}>
-            {/* <div className='nav-login-cart'> */}
                 <Link className=' dark:text-white' to="/cart">Cart 
                 <Cart/>
-                <div className='nav-card-count'>{cartCount}</div>
+                <div className='nav-card-count'>{lengthCart}</div>
                 </Link> 
-                {/* </div> */}
                 {menu==="cart"?<hr></hr>:<></>}
                 </li>
                 <li>
@@ -80,10 +87,6 @@ export default function NavBar(props) {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-              {/* <div className='nav-logo'>
-                <Clock/>
-                <p>EasyBusy</p>
-                </div> */}
           <Nav className="me-auto">
                     <li onClick={()=>{setMenu("auth")}}>
                     <Link className=' dark:text-white' to="/auth">Auth <HouseGear/> </Link>

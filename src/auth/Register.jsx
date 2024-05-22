@@ -7,8 +7,6 @@ import Row from 'react-bootstrap/Row';
 
 
 function Register(props){
-    // console.log(props);
-
     const {handelSubmit, changeHandler, address, setAddress }= props;
 
     const handlerAddress = (e)=>{

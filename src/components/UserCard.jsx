@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {React, useContext, useEffect, useState} from 'react'
+import {React, useContext } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import { Facebook, Twitter, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone} from "react-bootstrap-icons"
 import { UserContext } from '../context/User';
@@ -10,20 +10,15 @@ export default function UserCard() {
 
     //TODO: 
     //add option to upload profile image and change
-
-    useEffect(()=>{
-    },[])
-
   return (
     <div className='dark:text-white dark:bg-black  !important'>
     <section className='vh-100 dark:text-white important! dark:bg-black important!'>
     <MDBContainer className='dark:text-white dark:bg-black !important' >
       <MDBRow className="justify-content-center align-items-center h-100">
         <MDBCol lg="6" className="mb-4 mb-lg-0">
-            {/* <div className='dark:text-white dark:bg-black !important'> */}
           <MDBCard className="mb-3 dark:text-white dark:bg-black" style={{ borderRadius: '.5rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black"}}>
-            <MDBRow className="g-0">
-              <MDBCol md="4" className="gradient-custom text-center text-white"
+            <MDBRow className="max-w-full">
+              <MDBCol md="4" className="gradient-custom text-center text-white max-w-full"
                 style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem'}}
                 >
                    <Link to={`/profile/edit`}  className="penEdit dark:text-white dark:bg-black !important" >
@@ -85,7 +80,6 @@ export default function UserCard() {
               </MDBCol>
             </MDBRow>
           </MDBCard>
-            {/* </div> */}
         </MDBCol>
       </MDBRow>
     </MDBContainer>

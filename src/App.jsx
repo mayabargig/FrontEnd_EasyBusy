@@ -11,7 +11,6 @@ import Appointments from './pages/Appointments';
 import { UserContext } from './context/User';
 import UserCardEdit from './components/UserCardEdit';
 import Cart from './pages/Cart';
-import ThemeBtn from './context/ThemeBtn';
 import { ThemeProvider } from './context/Theme';
 import useLocalStorage from 'react-use-localstorage';
 
@@ -40,10 +39,6 @@ function App() {
   return (
     <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
       <Router>
-        {/* <Toggle/> */}
-        {/* <div  className=' dark:text-white dark:bg-black'   > dark</div> */}
-        {/* <div  className=' dark:bg-black dark:text-white'></div>  */}
-          <ThemeBtn />
         <NavBar themeMode={themeMode}/>
         {
           user ?
@@ -72,8 +67,6 @@ function App() {
             <Routes>
               <Route path='*' element={<Auth themeMode={themeMode}
                 isUserLog={isUserLog} setUserLog={setUserLog} />} />
-              {/* <Route path='auth/login' element={<Login/>} />
-            <Route path='auth/register' element={<Register />} /> */}
             </Routes>
         }
       </Router>

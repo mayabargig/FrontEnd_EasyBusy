@@ -18,7 +18,6 @@ export default function Cart() {
           });
           if(res.status === 200){
             const filtered = cart.filter((item)=>{
-              // console.log(item);
               return item.id !== id;
             });
             setCart([...filtered]);

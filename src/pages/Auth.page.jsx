@@ -3,24 +3,18 @@ import Login from '../auth/Login'
 import Register from '../auth/Register'
 import { APIBaseUrl } from '../config';
 import { UserContext } from '../context/User';
-// import {background} from '../images/background.jpg'
 import backgroundLight  from '../images/backgroundLight.jpg'
 import  macDark from '../images/macDark.jpg'
 
 export default function Auth (props) {
   const { isUserLog, setUserLog, themeMode}= props;
   const { user, setUser}=useContext(UserContext);
-  // console.log(props);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [address, setAddress] = useState({});
  
     const toggleMode = ()=>{
         setIsLoginMode(!isLoginMode);
     };
-
-    // useEffect(()=>{
-    //   setUserLog(isUserLog);
-    // },[isUserLog])
 
     const changeHandler= (e)=>{
       const { name, value } = e.target;
@@ -31,7 +25,7 @@ export default function Auth (props) {
     const handelSubmit= async (e)=>{
         e.preventDefault();
         console.log(e);
-  
+      console.log(isUserLog);
         try{
             if(isLoginMode){
               //login
@@ -56,7 +50,7 @@ export default function Auth (props) {
           body:JSON.stringify(user)
         });
         const data= await res.json();
-        // console.log(data);
+        console.log(data);
         setUser(data.user);
         const token = data.token;
         localStorage.setItem("user_token", token);
@@ -79,8 +73,7 @@ export default function Auth (props) {
           console.log(data);
           setUser(data.user);
           const token = data.token;
-          localStorage.setItem("user_token", JSON.stringify(token));
-          
+          localStorage.setItem("user_token", token); 
         }
         catch(error){
           console.log(error);
