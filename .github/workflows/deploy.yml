@@ -1,49 +1,51 @@
-name: Deploy
+name: Deploy to gb-pages
 
 on:
   push:
     branches:
-      - master
+      - main  # Change this to your default branch
 
 jobs:
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build  # Adjust this if your build command is different
 
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v4
-        with:
-          name: production-files
-          path: ./dist
+      - name: Create gb-pages branch
+        run: git checkout -b gb-pages
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+      - name: Copy files to root directory
+        run: cp -r ./dist/* .
 
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: production-files
-          path: ./dist
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      - name: Add files
+        run: git add .
+
+      - name: Commit changes
+        run: git commit -m 'Copy files to root directory in gb-pages branch'
+
+      - name: Push to gb-pages branch
+        run: git push origin gb-pages --force
+
+      - name: Switch back to default branch
+        run: git checkout main  # Change this to your default branch
+
+      - name: Delete gb-pages branch locally
+        run: git branch -D gb-pages
