@@ -36,11 +36,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build  # Adjust this if your build command is different
-
       - name: Create .env file
         run: echo "REACT_APP_SERVER_URL=${{ secrets.REACT_APP_SERVER_URL }}" > .env
+      
+      - name: Build project
+        run: npm run build  # Adjust this if your build command is different
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
