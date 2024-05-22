@@ -37,7 +37,7 @@ jobs:
         run: npm install
 
       - name: Create .env file
-        run: echo "VITE_EASY_BUSY_BACKEND__URL=${{ secrets.SERVER_URL }}" > .env.production
+        run: echo "VITE_EASY_BUSY_BACKEND__URL=${{ secrets.VITE_EASY_BUSY_BACKEND__URL }}" > .env
 
       - name: Build project
         run: npm run build  # Adjust this if your build command is different
