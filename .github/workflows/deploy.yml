@@ -42,7 +42,9 @@ jobs:
         run: git commit -m 'Copy files to root directory in gb-pages branch'
 
       - name: Push to gb-pages branch
-        run: git push origin gb-pages --force
+        env:
+          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+        run: git push https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/mayabargig/FrontEnd_EasyBusy.git gb-pages --force
 
       - name: Switch back to default branch
         run: git checkout main  # Change this to your default branch
