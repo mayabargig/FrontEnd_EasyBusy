@@ -60,6 +60,7 @@ jobs:
       - name: Push to gb-pages branch
         env:
           ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+        run: echo "${{ secrets.ACTIONS_PAT }}"
         run: git push https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/mayabargig/FrontEnd_EasyBusy.git gb-pages --force
 
       - name: Switch back to default branch
