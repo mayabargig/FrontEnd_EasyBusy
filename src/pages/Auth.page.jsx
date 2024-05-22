@@ -79,7 +79,6 @@ export default function Auth (props) {
           console.log(error);
         }}
 
-
   return (
     <div id="logSignP"  className="background  dark:text-white dark:bg-black"
     style={{ backgroundImage: `url(${themeMode === "dark"? `${macDark}`:`${backgroundLight}`})` }}>
