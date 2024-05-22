@@ -4,7 +4,7 @@ import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
   // refer to git repo path
-  base: '/FrontEnd_EasyBusy/'.toLocaleLowerCase(),
+  base: '/FrontEnd_EasyBusy/',
   plugins: [react()
   ],
   css: {
