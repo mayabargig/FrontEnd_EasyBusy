@@ -14,8 +14,13 @@ export default defineConfig({
     },
   },
   // sourcemap: true,
-  // build: {
-  //   // TODO:  change before build to prod
-  //   sourcemap: true
-  // }
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          return assetInfo?.name?.replace('assets/', '')
+        },
+      },
+    }
+  }
 });
