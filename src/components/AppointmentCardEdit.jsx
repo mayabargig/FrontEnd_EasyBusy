@@ -6,6 +6,7 @@ import { Input, TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import { PencilSquare, Trash3Fill, ArrowLeftSquare } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AppointmentCardEdit(props) {
     const { addLink, appointments, setAppointments, fetchAppointment } = props;
@@ -16,8 +17,8 @@ export default function AppointmentCardEdit(props) {
     const format = 'HH:mm';
     const [formData, setFormData] = useState([]);
     const navigate = useNavigate();
-    const [ updateAppointment, setUpdateAppointment]= useState({});
-    const [appointment, setAppointment]= useState({});
+    const [updateAppointment, setUpdateAppointment] = useState({});
+    const [appointment, setAppointment] = useState({});
 
     useEffect(() => {
         if (user.role === "admin") {
@@ -37,16 +38,16 @@ export default function AppointmentCardEdit(props) {
 
     const handleSave = async (id) => {
         console.log(updateAppointment);
-        try{
-            const res = await fetch(`${APIBaseUrl}/appointment/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(updateAppointment),
-            });
-            const data = await res.json();
+        try {
+            const data = await axios.patch(`${APIBaseUrl}/appointment/${id}`,
+                updateAppointment
+                , {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
             if (res.status === 200) {
                 setAppointment(data);
                 setEditableId(null);
@@ -56,7 +57,7 @@ export default function AppointmentCardEdit(props) {
             } else {
                 console.error('Failed to update appointment');
             }
-        }catch (error) {
+        } catch (error) {
             console.error(error);
         }
     };
@@ -83,15 +84,15 @@ export default function AppointmentCardEdit(props) {
     const addAppointments = async () => {
         console.log(formData);
         try {
-            const res = await fetch(`${APIBaseUrl}/appointment`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(formData, user)
-            });
-            const data = await res.json();
+            const res = await axios.post(`${APIBaseUrl}/appointment`, JSON.parse(JSON.stringify(formData, user)),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            const data = res.data;
             setAppointments([...appointments, data.data]);
             console.log(data);
         }
@@ -103,9 +104,7 @@ export default function AppointmentCardEdit(props) {
     const deleteAppointment = async (id) => {
         console.log(id);
         try {
-            const res = await fetch(`${APIBaseUrl}/appointment/${id}`, {
-                method: "DELETE"
-            });
+            const res = await axios.delete(`${APIBaseUrl}/appointment/${id}`);
             if (res.status === 200) {
                 const filtered = appointments.filter((item) => {
                     return item.id !== id;
@@ -122,16 +121,16 @@ export default function AppointmentCardEdit(props) {
         if (spreadName?.length > 1) {
             setUpdateAppointment(prev => ({ ...prev, [spreadName[0]]: { ...(prev?.[spreadName[0]] || {}), [spreadName[1]]: value } }));
         } else {
-        setUpdateAppointment(prev => ({ ...prev, [field]: value }))
+            setUpdateAppointment(prev => ({ ...prev, [field]: value }))
         }
-      };
+    };
 
 
     return (
         <div id='tableContainer' className=' dark:text-white dark:bg-black'>
-            <div style={{display:'flex', justifyContent:'center'}}>
-            <button onClick={addClick} type="button" className="btn btn-primary">Add</button>
-            <button style={{display:'flex', flexDirection:'row'}} onClick={addLink} type="button" className="btn btn-warning">Back <ArrowLeftSquare /></button>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button onClick={addClick} type="button" className="btn btn-primary">Add</button>
+                <button style={{ display: 'flex', flexDirection: 'row' }} onClick={addLink} type="button" className="btn btn-warning">Back <ArrowLeftSquare /></button>
             </div>
             {
                 (appointments) ? (
@@ -152,33 +151,33 @@ export default function AppointmentCardEdit(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {appointments.map((appointment) => { 
+                            {appointments.map((appointment) => {
                                 return <tr key={appointment._id} className=' dark:text-white dark:bg-black'>
                                     <td className=' dark:text-white dark:bg-black'
-                                    contentEditable={editableId===appointment.id}
-                                    onBlur={(e) => handleBlur("title", e.target.innerText)}
+                                        contentEditable={editableId === appointment.id}
+                                        onBlur={(e) => handleBlur("title", e.target.innerText)}
                                     >
                                         {appointment.title}</td>
                                     <td className=' dark:text-white dark:bg-black'
-                                     contentEditable={editableId===appointment.id}
-                                     onBlur={(e) => handleBlur("date", e.target.innerText)}
+                                        contentEditable={editableId === appointment.id}
+                                        onBlur={(e) => handleBlur("date", e.target.innerText)}
                                     >
                                         {appointment.date}</td>
                                     <td className=' dark:text-white dark:bg-black'
-                                     contentEditable={editableId===appointment.id}
-                                     onBlur={(e) => handleBlur("timeSlot.start", e.target.innerText)}
-                                     >
+                                        contentEditable={editableId === appointment.id}
+                                        onBlur={(e) => handleBlur("timeSlot.start", e.target.innerText)}
+                                    >
                                         {appointment.timeSlot.start}</td>
                                     <td className=' dark:text-white dark:bg-black'
-                                     contentEditable={editableId===appointment.id}
-                                     onBlur={(e) => handleBlur("timeSlot.end", e.target.innerText)}
-                                     >
+                                        contentEditable={editableId === appointment.id}
+                                        onBlur={(e) => handleBlur("timeSlot.end", e.target.innerText)}
+                                    >
                                         {appointment.timeSlot.end}</td>
                                     {
                                         isAdmin ? (
                                             <td className=' dark:text-white dark:bg-black'
-                                            contentEditable={editableId===appointment.id}
-                                            onBlur={(e) => handleBlur("userName", e.target.innerText)}
+                                                contentEditable={editableId === appointment.id}
+                                                onBlur={(e) => handleBlur("userName", e.target.innerText)}
                                             >
                                                 {appointment.userName}</td>
                                         ) : null
@@ -186,8 +185,8 @@ export default function AppointmentCardEdit(props) {
                                     <td className=' dark:text-white dark:bg-black'>
                                         {isAdmin && editableId !== appointment.id ? (
                                             <>
-                                            <Button onClick={() => handleEdit(appointment.id)}>Edit <PencilSquare /></Button>
-                                            <button onClick={() => deleteAppointment(appointment.id)} type="button" className="btn btn-danger">Delete<Trash3Fill /></button>
+                                                <Button onClick={() => handleEdit(appointment.id)}>Edit <PencilSquare /></Button>
+                                                <button onClick={() => deleteAppointment(appointment.id)} type="button" className="btn btn-danger">Delete<Trash3Fill /></button>
                                             </>
                                         ) : editableId === appointment.id ? (
                                             <>
@@ -196,7 +195,8 @@ export default function AppointmentCardEdit(props) {
                                             </>
                                         ) : null}
                                     </td>
-                                </tr>}
+                                </tr>
+                            }
                             )}
                         </tbody>
                         {isClick ? (

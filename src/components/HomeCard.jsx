@@ -54,14 +54,8 @@ export default function HomeCard(props) {
       console.log(user.id);
       console.log(productId);
       try{
-        const res = await fetch(`${APIBaseUrl}/favorites/`, {
-          method: "POST",
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({product:productId, userId:user.id})
+        const {data} = await axios.post(`${APIBaseUrl}/favorites/`, {product:productId, userId:user.id
         });
-        const data= await res.json();
         isProductLiked();
       }
       catch(error){
@@ -73,14 +67,7 @@ export default function HomeCard(props) {
     console.log(user.id);
     console.log(productId);
     try{
-      const res = await fetch(`${APIBaseUrl}/cart`, {
-        method: "POST",
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({product:productId, userId:user.id})
-      });
-      const data= await res.json();
+      const {data} = await axios.post(`${APIBaseUrl}/cart`, {product:productId, userId:user.id})
       setCart([...cart,data.data]);
       getCarts();
     }

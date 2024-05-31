@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home.page'
 import User from './pages/User.page'
 import Auth from './pages/Auth.page'
@@ -12,7 +12,6 @@ import { UserContext } from './context/User';
 import UserCardEdit from './components/UserCardEdit';
 import Cart from './pages/Cart';
 import { ThemeProvider } from './context/Theme';
-import useLocalStorage from 'react-use-localstorage';
 
 function App() {
   const { user, getCarts } = useContext(UserContext);
@@ -38,7 +37,7 @@ function App() {
 
   return (
     <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
-      <Router>
+      <BrowserRouter basename="/FrontEnd_EasyBusy"> {/* Replace /your-base-url with your actual base URL */}
         <NavBar themeMode={themeMode}/>
         {
           user ?
@@ -69,7 +68,7 @@ function App() {
                 isUserLog={isUserLog} setUserLog={setUserLog} />} />
             </Routes>
         }
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   )
 }
