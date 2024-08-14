@@ -16,7 +16,7 @@ function Login(props){
                 <Row>
                 <Col>
                 <Form.Control name="email" onChange={changeHandler}
-                placeholder="Email Address" defaultValue={"mayabargig@gmail.com"}/>
+                placeholder="Email Address" defaultValue="mayabargig@gmail.com"/>
                 <Form.Text className="text-muted  dark:text-white">
                   We'll never share your email with anyone else.
                 </Form.Text>
@@ -25,7 +25,7 @@ function Login(props){
                 <Row>
                 <Col>
                 <Form.Control name="password" onChange={changeHandler}
-                placeholder="Password" defaultValue={"123"}/>
+                placeholder="Password" defaultValue="123"/>
                 </Col>
             </Row><br></br>
       <Button variant="primary" type="submit">
