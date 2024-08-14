@@ -4,7 +4,7 @@ import CartCard from '../components/CartCard';
 import { UserContext } from '../context/User';
 
 export default function Cart() {
-    const { user, SingOutClick, token, cartCount, getCarts, setCart, loading, cart}=useContext(UserContext);
+    const { getCarts, setCart, loading, cart}=useContext(UserContext);
 
   useEffect(()=>{
     getCarts();

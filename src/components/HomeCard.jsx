@@ -9,7 +9,7 @@ import { UserContext } from '../context/User';
 import axios from 'axios';
 
 export default function HomeCard(props) {
-  const { user , getCarts, favorites, getFavorites, deleteFav } = useContext(UserContext);
+  const { user , getCarts, favorites, getFavorites } = useContext(UserContext);
   const [isLiked, setLiked] = useState(true);
   const [cart, setCart] = useState([]);
   const {item, setProducts, products}= props;

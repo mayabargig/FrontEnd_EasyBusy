@@ -7,7 +7,6 @@ export default function CalenderComponents(props) {
   return (
     <div>
       <h1>{formattedDate}</h1>
-      
     </div>
   )
 }

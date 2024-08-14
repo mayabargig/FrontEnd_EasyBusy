@@ -7,11 +7,10 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import EasyBusyicon from '../images/EasyBusyicon.png'
-import '../toggle/Toggle.css'
 import ThemeBtn from '../context/ThemeBtn';
 
 export default function NavBar(props) {
-  const { user, SingOutClick, token, cartCount, getCarts }=useContext(UserContext);
+  const { user, SingOutClick, cartCount }=useContext(UserContext);
   const [menu, setMenu]= useState("shop");
   const [lengthCart, setLengthCart] = useState()
   const { themeMode} = props;
@@ -36,7 +35,6 @@ export default function NavBar(props) {
                         <span className="sr-only">View notifications</span>
                         <ThemeBtn aria-hidden="true" />
                       </button>
-          {/* <ThemeBtn className='p-4'/> */}
           <Navbar.Brand href="#home">
             <img src={EasyBusyicon} style={{ width: '3rem', height: '3rem' }}/>
             <p>EasyBusy</p>
@@ -94,6 +92,7 @@ export default function NavBar(props) {
                     </li>
                     </Nav>
         </Navbar.Collapse>
+          <ThemeBtn aria-hidden="true"/>
           </Container>
           </Navbar>
 }

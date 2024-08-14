@@ -43,7 +43,6 @@ export default function Appointments() {
             day = '0' + day
 
         setDate([year, month, day].join('-'));
-        // console.log([year, month, day].join('-'));
         fetch(`${APIBaseUrl}/appointment/?date=${[year, month, day].join('-')}`)
             .then(res => res.json())
             .then(res => {
@@ -51,8 +50,6 @@ export default function Appointments() {
             })
             .catch(err => console.log(err))
     };
-
-    console.log(appointmentsDay);
 
     const fetchAppointment = () => {
         fetch(`${APIBaseUrl}/appointment`)

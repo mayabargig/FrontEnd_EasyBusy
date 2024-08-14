@@ -11,6 +11,12 @@ export default function UserProvider({children}) {
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
     const [favorites, setFavorites] = useState([]);
+
+    const logError = (error) => {
+      // This function would send the error to a logging service or save it on your server
+      axios.post(`${APIBaseUrl}/log-error`, { error: error.message });
+    };
+  
     
     const getUser = async()=>{
       try {
@@ -19,10 +25,9 @@ export default function UserProvider({children}) {
             Authorization: `Bearer ${token}`
           }
         });
-        // console.log(res.data);
         setUser(res.data);
       } catch (error) {
-        console.log(error);
+        logError(error);
       }
     }
     useEffect(()=>{
@@ -48,7 +53,7 @@ export default function UserProvider({children}) {
         setCartCount(res.data.length)
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        logError(error);
       }
       setLoading(false)
     }
@@ -58,7 +63,7 @@ export default function UserProvider({children}) {
         const res = await axios.get(`${APIBaseUrl}/favorites/user/${user.id}`);
         setFavorites(res.data);
       }catch(error){
-        console.log(error);
+        logError(error);
       }
     }
 
@@ -75,7 +80,7 @@ export default function UserProvider({children}) {
           getFavorites();
         }
       } catch (error) {
-        console.log(error);
+        logError(error);
       }
     }
   

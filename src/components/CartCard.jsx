@@ -9,10 +9,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CartCard(props) {
-  const { item, deleteFromCard, cart, setCart } = props;
+  const { item, deleteFromCard, cart } = props;
   const [singCart, setSingCart] = useState({});
-  const [cartP, setCartP] = useState([]);
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getCart();

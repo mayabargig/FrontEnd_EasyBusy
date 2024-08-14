@@ -20,7 +20,7 @@ export default function Auth(props) {
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setUserLog({ ...isUserLog, "address": address, [name]: value });
-    console.log(isUserLog);
+    // console.log(isUserLog);
   };
 
   const handelSubmit = async (e) => {
@@ -39,7 +39,6 @@ export default function Auth(props) {
   };
 
   const loginUser = async (user) => {
-    console.log(user);
     try {
       const { data } = await axios.post(`${APIBaseUrl}/users/login`,
         user
@@ -54,7 +53,6 @@ export default function Auth(props) {
   };
 
   const registerUser = async (user) => {
-    // console.log(user);
     try {
       const { data } = await axios.post(`${APIBaseUrl}/users/register`, user);
       setUser(data.user);

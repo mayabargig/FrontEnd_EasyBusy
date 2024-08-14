@@ -9,7 +9,6 @@ import { APIBaseUrl } from '../config';
 
 export default function UserCardEdit() {
   const { user, token, setUser } = useContext(UserContext);
-  const[newUser, setNewUser]= useState({});
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
 

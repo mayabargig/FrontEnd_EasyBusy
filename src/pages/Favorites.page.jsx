@@ -1,37 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { APIBaseUrl } from '../config';
-// import HomeCard from '../components/HomeCard';
+import React, { useContext, useEffect } from 'react'
 import FavoritesCard from '../components/FavoritesCard';
 import { UserContext } from '../context/User';
-import axios from 'axios';
 
 
 export default function Favorites() {
-  const { user, favorites, setFavorites, getFavorites} = useContext(UserContext);
-  // const [favorites, setFavorites] = useState([]);
+  const { favorites, getFavorites} = useContext(UserContext);
 
   useEffect(()=>{
     getFavorites();
   },[]);
-
-  // const deleteFav = async(id)=>{
-  //   console.log(id);
-  //   try {
-  //     const res = await axios(`${APIBaseUrl}/favorites/${id}`, {
-  //       method:"DELETE"
-  //     });
-  //     if(res.status === 200){
-  //       const filtered = favorites.filter((item)=>{
-  //         return item.id !== id;
-  //       });
-  //       setFavorites([...filtered]);
-  //       getFavorites();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-    // console.log(favorites);
     
   return (
     <div>
