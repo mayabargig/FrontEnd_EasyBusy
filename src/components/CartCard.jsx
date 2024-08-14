@@ -21,12 +21,9 @@ export default function CartCard(props) {
   const getCart = async () => {
     try {
       const isFav = !cart.forEach((pro) => pro._id === item.product);
-      console.log(isFav);
       if (isFav) {
         const { data } = await axios.get(`${APIBaseUrl}/products/${item.product}/`);
-        console.log(data);
         setSingCart({ data: data, id: item._id });
-        // setCartP((prevFavorites) => [...prevFavorites, data, {id:item._id}]);
       }
     } catch (error) {
       setSingCart([null])

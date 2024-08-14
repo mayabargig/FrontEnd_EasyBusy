@@ -32,7 +32,6 @@ export default function Appointments() {
     }, []);
 
     const fetchAppointmentDay = (newValue) => {
-        console.log({ newValue });
         let date = new Date(newValue),
             month = '' + (date.getMonth() + 1),
             day = '' + date.getDate(),
@@ -44,12 +43,11 @@ export default function Appointments() {
             day = '0' + day
 
         setDate([year, month, day].join('-'));
-        console.log([year, month, day].join('-'));
+        // console.log([year, month, day].join('-'));
         fetch(`${APIBaseUrl}/appointment/?date=${[year, month, day].join('-')}`)
             .then(res => res.json())
             .then(res => {
                 setAppointmentsDay(res);
-                console.log(res);
             })
             .catch(err => console.log(err))
     };
@@ -61,7 +59,6 @@ export default function Appointments() {
             .then(res => res.json())
             .then(res => {
                 setAppointments(res);
-                console.log(res);
             })
             .catch(err => console.log(err))
     };

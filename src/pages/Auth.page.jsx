@@ -25,8 +25,6 @@ export default function Auth(props) {
 
   const handelSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(isUserLog);
     try {
       if (isLoginMode) {
         //login
@@ -46,7 +44,6 @@ export default function Auth(props) {
       const { data } = await axios.post(`${APIBaseUrl}/users/login`,
         user
       );
-      console.log(data);
       setUser(data.user);
       const token = data.token;
       localStorage.setItem("user_token", token);
@@ -60,7 +57,6 @@ export default function Auth(props) {
     // console.log(user);
     try {
       const { data } = await axios.post(`${APIBaseUrl}/users/register`, user);
-      console.log(data);
       setUser(data.user);
       const token = data.token;
       localStorage.setItem("user_token", token);

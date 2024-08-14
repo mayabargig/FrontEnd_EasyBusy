@@ -29,7 +29,6 @@ export default function Home() {
     setClick(!isClick);
   };
 
-  console.log(products);
   return (
     <div className=' dark:text-white dark:bg-black'>
       {isClick?(

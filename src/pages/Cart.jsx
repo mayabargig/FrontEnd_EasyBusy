@@ -11,7 +11,6 @@ export default function Cart() {
   },[]);
 
       const deleteFromCard= async(id)=>{
-        console.log(id);
         try {
           const res = await fetch(`${APIBaseUrl}/cart/${id}`, {
             method:"DELETE"

@@ -13,7 +13,6 @@ export default function UserProvider({children}) {
     const [favorites, setFavorites] = useState([]);
     
     const getUser = async()=>{
-      console.log(token);
       try {
         const res = await axios.get(`${APIBaseUrl}/users/init-user`,{
           headers: {
@@ -45,7 +44,6 @@ export default function UserProvider({children}) {
     const getCarts = async () => {
       try {
         const res = await axios.get(`${APIBaseUrl}/cart/${user.id}`);
-        console.log(res.data);
         setCart(res.data);
         setCartCount(res.data.length)
         setLoading(false);
@@ -65,7 +63,6 @@ export default function UserProvider({children}) {
     }
 
     const deleteFav = async(id)=>{
-      console.log(id);
       try {
         const res = await axios(`${APIBaseUrl}/favorites/${id}`, {
           method:"DELETE"

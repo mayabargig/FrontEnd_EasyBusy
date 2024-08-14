@@ -14,8 +14,6 @@ export default function FavoritesCard(props) {
     const [fav, setFav] = useState([null]);
     const {item}= props;
 
-  console.log(item);
-
     useEffect(()=>{
             getFavPro();
       },[favorites]);
@@ -27,7 +25,6 @@ export default function FavoritesCard(props) {
     const getFavPro = async () => {
         try {
             const isFav = !favorites?.forEach((pro) => pro._id === item.product);
-            console.log(isFav);
             if (isFav) {
             const {data} = await axios.get(`${APIBaseUrl}/products/${item.product}/`);
                 setFav({data:data, id:item._id});

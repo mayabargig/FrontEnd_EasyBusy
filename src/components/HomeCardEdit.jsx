@@ -33,10 +33,7 @@ export default function HomeCardEdit(props) {
               setFormData({ ...formData, [name]: value});
           };
             
-console.log(formData);
-
 const addProducts = async ()=>{
-     console.log(formData);
     try{
       const res = await fetch(`${APIBaseUrl}/products`, {
         method: "POST",
@@ -48,7 +45,6 @@ const addProducts = async ()=>{
       });
       const data= await res.json();
       setProducts([...products,data.data]);
-      console.log(data);
     }
     catch(error){
       console.log(error);

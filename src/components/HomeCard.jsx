@@ -28,12 +28,9 @@ export default function HomeCard(props) {
         setLiked(false);
       }
     })
-    console.log(isLiked);
   }
 
     const clickFav = (id)=>{
-      console.log(id);
-      console.log(item);
       
       if(isLiked){
           setLiked(false);
@@ -51,8 +48,6 @@ export default function HomeCard(props) {
     };
 
     const addFavProduct =async (productId, user)=>{
-      console.log(user.id);
-      console.log(productId);
       try{
         const {data} = await axios.post(`${APIBaseUrl}/favorites/`, {product:productId, userId:user.id
         });
@@ -64,8 +59,6 @@ export default function HomeCard(props) {
   }
 
   const addProductToCart =async (productId)=>{
-    console.log(user.id);
-    console.log(productId);
     try{
       const {data} = await axios.post(`${APIBaseUrl}/cart`, {product:productId, userId:user.id})
       setCart([...cart,data.data]);
@@ -77,7 +70,6 @@ export default function HomeCard(props) {
 }
 
   const deleteProduct = async(id)=>{
-    console.log(id);
     try {
       const res = await fetch(`${APIBaseUrl}/products/${id}`, {
         method:"DELETE"
@@ -94,11 +86,8 @@ export default function HomeCard(props) {
   }
 
   const deleteFavByProId = async (productId, user) => {
-    console.log(user.id);
-    console.log(productId);
     try {
         const res = await axios.delete(`${APIBaseUrl}/favorites/delete/${user.id}/${productId}`);
-        console.log(res.data);
         getFavorites();
     } catch (error) {
         console.error(error);

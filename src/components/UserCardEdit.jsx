@@ -18,7 +18,6 @@ export default function UserCardEdit() {
 
   const handleInputChange = (name, value) => {
     setFormData(user);
-    console.log(name, value);
     /** @type {string[]} */
     const spreadName = name?.split('.')
     if (spreadName?.length > 1) {

@@ -10,7 +10,6 @@ import { Button } from 'react-bootstrap';
 function HomeSingleEl (){
     const params = useParams();
     const [product, setProduct] = useState({});
-    console.log(params.id);
     const [isLiked, setLiked] = useState();
 
     //TODO:
@@ -25,8 +24,6 @@ function HomeSingleEl (){
             console.log(error);
         }
     }
-
-    console.log(product);
 
     useEffect(()=>{
       getProduct();

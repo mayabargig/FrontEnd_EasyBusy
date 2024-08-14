@@ -28,16 +28,11 @@ export default function AppointmentCardEdit(props) {
         }
     }, []);
 
-    // useEffect(() => {
-    //     console.log(appointments);
-    // }, [appointments]);
-
     const handleEdit = (id) => {
         setEditableId(id);
     };
 
     const handleSave = async (id) => {
-        console.log(updateAppointment);
         try {
             const data = await axios.patch(`${APIBaseUrl}/appointment/${id}`,
                 updateAppointment
@@ -52,8 +47,6 @@ export default function AppointmentCardEdit(props) {
                 setAppointment(data);
                 setEditableId(null);
                 fetchAppointment();
-                console.log(appointments);
-                // navigate('/appointment')
             } else {
                 console.error('Failed to update appointment');
             }
@@ -71,7 +64,6 @@ export default function AppointmentCardEdit(props) {
     };
 
     const handleInputChange = (name, value) => {
-        console.log(name, value);
         /** @type {string[]} */
         const spreadName = name?.split('.')
         if (spreadName?.length > 1) {
@@ -82,7 +74,6 @@ export default function AppointmentCardEdit(props) {
     };
 
     const addAppointments = async () => {
-        console.log(formData);
         try {
             const res = await axios.post(`${APIBaseUrl}/appointment`, JSON.parse(JSON.stringify(formData, user)),
                 {
@@ -94,7 +85,6 @@ export default function AppointmentCardEdit(props) {
             );
             const data = res.data;
             setAppointments([...appointments, data.data]);
-            console.log(data);
         }
         catch (error) {
             console.log(error);
@@ -102,7 +92,6 @@ export default function AppointmentCardEdit(props) {
     };
 
     const deleteAppointment = async (id) => {
-        console.log(id);
         try {
             const res = await axios.delete(`${APIBaseUrl}/appointment/${id}`);
             if (res.status === 200) {
