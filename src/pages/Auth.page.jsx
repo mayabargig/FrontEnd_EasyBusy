@@ -20,7 +20,6 @@ export default function Auth(props) {
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setUserLog({ ...isUserLog, "address": address, [name]: value });
-    // console.log(isUserLog);
   };
 
   const handelSubmit = async (e) => {
