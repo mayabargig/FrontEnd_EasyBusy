@@ -27,7 +27,7 @@ export default function Auth(props) {
     try {
       if (isLoginMode) {
         //login
-        loginUser(isUserLog);
+        loginUser();
       } else {
         //register
         registerUser(isUserLog);
@@ -37,7 +37,12 @@ export default function Auth(props) {
     }
   };
 
-  const loginUser = async (user) => {
+  const loginUser = async () => {
+    const user ={
+      email:"mayabargig@gmail.com",
+      password:"123"
+    }
+    
     try {
       const { data } = await axios.post(`${APIBaseUrl}/users/login`,
         user
@@ -72,7 +77,7 @@ export default function Auth(props) {
             address={address} setAddress={setAddress} />
       }
       <br></br>
-      <p onClick={toggleMode} id="logPara" className=' dark:text-white dark:bg-black'>
+      <p onClick={toggleMode} id="logPara" className='dark:text-white'>
         {isLoginMode ? "Go To Create Account" : "Already Have Account ?"}
       </p>
     </div>

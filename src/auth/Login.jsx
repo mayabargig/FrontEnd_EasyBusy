@@ -8,8 +8,8 @@ import Row from 'react-bootstrap/Row';
 function Login(props){
     const {changeHandler,handelSubmit }= props;
 
-    const defaultEmail = "mayabargig@gmail.com";
-    const defaultPassword = "123";
+    // const defaultEmail = "mayabargig@gmail.com";
+    // const defaultPassword = "123";
 
     return(
       <div className=' dark:text-white dark:bg-black'>
@@ -20,10 +20,12 @@ function Login(props){
                 <Col>
                 <Form.Control 
                 name="email"
-                defaultValue={defaultEmail} 
-                onChange={changeHandler}
-                placeholder="Email Address"/>
-                <Form.Text className="text-muted  dark:text-white">
+                // defaultValue={defaultEmail} 
+                // onChange={changeHandler}
+                // placeholder="Email Address"
+                placeholder="mayabargig@gmail.com"
+                />
+                <Form.Text className="dark:text-white dark:bg-black">
                   We'll never share your email with anyone else.
                 </Form.Text>
                 </Col>
@@ -32,9 +34,11 @@ function Login(props){
                 <Col>
                 <Form.Control 
                 name="password" 
-                defaultValue={defaultPassword} 
-                onChange={changeHandler}
-                placeholder="Password"/>
+                // defaultValue={defaultPassword} 
+                // onChange={changeHandler}
+                placeholder="123"
+                // placeholder="Password"
+                />
                 </Col>
             </Row><br></br>
       <Button variant="primary" type="submit">

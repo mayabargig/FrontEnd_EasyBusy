@@ -27,7 +27,7 @@ export default function UserProvider({children}) {
         });
         setUser(res.data);
       } catch (error) {
-        logError(error);
+        console.log();(error);
       }
     }
     useEffect(()=>{
