@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {React, useContext } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-import { Facebook, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone, Linkedin} from "react-bootstrap-icons"
+import { Facebook, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone, Linkedin, Github} from "react-bootstrap-icons"
 import { UserContext } from '../context/User';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ export default function UserCard() {
               <MDBCol md="4" className="gradient-custom text-center text-white max-w-full"
                 style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem'}}
                 >
-                   <Link to={`/profile/edit`}  className="penEdit dark:text-white dark:bg-black !important" >
+                   <Link to={`/profile/edit`}  className="penEdit" >
                   <PencilSquare cla />
                   </Link>
                     <div style={{display:'flex', alignItems: 'center', justifyContent:'center' }}> 
@@ -75,6 +75,7 @@ export default function UserCard() {
                       <a className="dark:text-white" href="https://www.linkedin.com/in/maya-bargig-1a7902287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><Linkedin /></a>
                       <a className="dark:text-white" href="https://www.instagram.com/maya_bargig?igsh=MTI5aWl2OXBkaHNzbg%3D%3D&utm_source=qr"><Instagram /></a>
                       <a className="dark:text-white" href="https://wa.me/972528612326"><Whatsapp /></a>
+                      <a className="dark:text-white" href="https://github.com/mayabargig"><Github /></a>
                     </div>
                     ):(
                       <div className='divIcons'>
@@ -82,6 +83,7 @@ export default function UserCard() {
                       <a className="dark:text-white" href="#!"><Linkedin /></a>
                       <a className="dark:text-white" href="#!"><Instagram /></a>
                       <a className="dark:text-white" href="#!"><Whatsapp /></a>
+                      <a className="dark:text-white" href="#!"><Github /></a>
                     </div>
                     )
                   }
