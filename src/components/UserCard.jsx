@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {React, useContext } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-import { Facebook, Twitter, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone} from "react-bootstrap-icons"
+import { Facebook, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone, Linkedin} from "react-bootstrap-icons"
 import { UserContext } from '../context/User';
 import { Link } from 'react-router-dom';
 
@@ -68,13 +68,23 @@ export default function UserCard() {
                       <MDBTypography className="dark:text-white" tag="h6">{user.address.country} , {user.address.city}</MDBTypography>
                       <MDBCardText className="dark:text-white">{user.address.street} \ {user.address.apartment}</MDBCardText>
                   </MDBRow><br></br>
-
-                  <div className='divIcons'>
-                    <a className="dark:text-white" href="#!"><Facebook /></a>
-                    <a className="dark:text-white" href="#!"><Twitter /></a>
-                    <a className="dark:text-white" href="#!"><Instagram /></a>
-                    <a className="dark:text-white" href="#!"><Whatsapp /></a>
-                  </div>
+                  {
+                    user.email ==="mayabargig@gmail.com"?(
+                      <div className='divIcons'>
+                      <a className="dark:text-white" href="https://www.facebook.com/maya.brgig?mibextid=LQQJ4d"><Facebook /></a>
+                      <a className="dark:text-white" href="https://www.linkedin.com/in/maya-bargig-1a7902287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><Linkedin /></a>
+                      <a className="dark:text-white" href="https://www.instagram.com/maya_bargig?igsh=MTI5aWl2OXBkaHNzbg%3D%3D&utm_source=qr"><Instagram /></a>
+                      <a className="dark:text-white" href="https://wa.me/972528612326"><Whatsapp /></a>
+                    </div>
+                    ):(
+                      <div className='divIcons'>
+                      <a className="dark:text-white" href="#!"><Facebook /></a>
+                      <a className="dark:text-white" href="#!"><Linkedin /></a>
+                      <a className="dark:text-white" href="#!"><Instagram /></a>
+                      <a className="dark:text-white" href="#!"><Whatsapp /></a>
+                    </div>
+                    )
+                  }
                 </MDBCardBody>
                   </div>
               </MDBCol>
