@@ -21,7 +21,7 @@ export default function UserCard() {
               <MDBCol md="4" className="gradient-custom text-center text-white max-w-full"
                 style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem'}}
                 >
-                   <Link to={`/profile/edit`}  className="penEdit" >
+                   <Link to={`/profile/edit`}  className="penEdit dark:text-white" >
                   <PencilSquare cla />
                   </Link>
                     <div style={{display:'flex', alignItems: 'center', justifyContent:'center' }}> 
