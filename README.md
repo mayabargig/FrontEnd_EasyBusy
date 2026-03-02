@@ -1,8 +1,69 @@
-# React + Vite
+# EasyBusy - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Client side of the EasyBusy appointment management system.  
+Built with React and Vite.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
+- React
+- Vite
+- Axios
+- React Router
+- CSS
+
+---
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/mayabargig/FrontEnd_EasyBusy.git
+cd FrontEnd_EasyBusy
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## 🔗 Environment Variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+VITE_EASY_BUSY_BACKEND__URL=http://localhost:5000/api/v1
+```
+
+If using production backend (Heroku):
+
+```env
+VITE_EASY_BUSY_BACKEND__URL=https://your-heroku-app.herokuapp.com/api/v1
+```
+
+---
+
+## ▶️ Run the App
+
+```bash
+npm run dev
+```
+
+The app will run on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## 🌍 Deployment
+
+The frontend can be deployed using:
+- Vercel
+- Netlify
+- GitHub Pages
