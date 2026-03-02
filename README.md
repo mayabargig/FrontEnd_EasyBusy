@@ -42,7 +42,7 @@ VITE_EASY_BUSY_BACKEND__URL=http://localhost:5000/api/v1
 If using production backend (Heroku):
 
 ```env
-VITE_EASY_BUSY_BACKEND__URL=https://your-heroku-app.herokuapp.com/api/v1
+VITE_EASY_BUSY_BACKEND__URL=https://easybusy-api.herokuapp.com/api/v1
 ```
 
 ---
