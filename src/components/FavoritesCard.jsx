@@ -6,14 +6,13 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { APIBaseUrl } from '../config';
 import { UserContext } from '../context/User';
+import axios from 'axios';
 
 export default function FavoritesCard(props) {
   const { favorites, getFavorites, deleteFav} = useContext(UserContext);
     const [isLiked, setLiked] = useState(true);
     const [fav, setFav] = useState([null]);
     const {item}= props;
-
-  console.log(item);
 
     useEffect(()=>{
             getFavPro();
@@ -26,10 +25,8 @@ export default function FavoritesCard(props) {
     const getFavPro = async () => {
         try {
             const isFav = !favorites?.forEach((pro) => pro._id === item.product);
-            console.log(isFav);
             if (isFav) {
-            const res = await fetch(`${APIBaseUrl}/products/${item.product}/`);
-            const data = await res.json();
+            const {data} = await axios.get(`${APIBaseUrl}/products/${item.product}/`);
                 setFav({data:data, id:item._id});
         }
         } catch (error) {

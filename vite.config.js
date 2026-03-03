@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
+  // refer to git repo path
   base: '/FrontEnd_EasyBusy/',
   plugins: [react()
   ],

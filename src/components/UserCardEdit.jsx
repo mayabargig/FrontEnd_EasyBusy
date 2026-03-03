@@ -1,6 +1,6 @@
 import {React, useContext, useEffect, useState} from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-import { Facebook, Twitter, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone} from "react-bootstrap-icons"
+import { Facebook, Twitter, Instagram, Whatsapp,PencilSquare ,InfoCircle,GeoAlt, EnvelopeAt,Telephone, Linkedin, Github} from "react-bootstrap-icons"
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/User';
 import { Input } from 'antd';
@@ -9,7 +9,6 @@ import { APIBaseUrl } from '../config';
 
 export default function UserCardEdit() {
   const { user, token, setUser } = useContext(UserContext);
-  const[newUser, setNewUser]= useState({});
   const [formData, setFormData] = useState([]);
   const navigate = useNavigate();
 
@@ -18,7 +17,6 @@ export default function UserCardEdit() {
 
   const handleInputChange = (name, value) => {
     setFormData(user);
-    console.log(name, value);
     /** @type {string[]} */
     const spreadName = name?.split('.')
     if (spreadName?.length > 1) {
@@ -145,9 +143,10 @@ const updateUser =async ()=>{
 
                   <div className='divIcons'>
                   <a className="dark:text-white" href="#!"><Facebook /></a>
-                    <a className="dark:text-white" href="#!"><Twitter /></a>
+                    <a className="dark:text-white" href="#!"><Linkedin /></a>
                     <a className="dark:text-white" href="#!"><Instagram /></a>
                     <a className="dark:text-white" href="#!"><Whatsapp /></a>
+                    <a className="dark:text-white" href="#!"><Github /></a>
                   </div>
                   <br></br>
                         <div>

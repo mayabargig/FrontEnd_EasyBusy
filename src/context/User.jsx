@@ -11,19 +11,23 @@ export default function UserProvider({children}) {
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
     const [favorites, setFavorites] = useState([]);
+
+    const logError = (error) => {
+      // This function would send the error to a logging service or save it on your server
+      axios.post(`${APIBaseUrl}/log-error`, { error: error.message });
+    };
+  
     
     const getUser = async()=>{
-      console.log(token);
       try {
         const res = await axios.get(`${APIBaseUrl}/users/init-user`,{
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-        // console.log(res.data);
         setUser(res.data);
       } catch (error) {
-        console.log(error);
+        console.log();(error);
       }
     }
     useEffect(()=>{
@@ -45,12 +49,11 @@ export default function UserProvider({children}) {
     const getCarts = async () => {
       try {
         const res = await axios.get(`${APIBaseUrl}/cart/${user.id}`);
-        console.log(res.data);
         setCart(res.data);
         setCartCount(res.data.length)
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        logError(error);
       }
       setLoading(false)
     }
@@ -60,12 +63,11 @@ export default function UserProvider({children}) {
         const res = await axios.get(`${APIBaseUrl}/favorites/user/${user.id}`);
         setFavorites(res.data);
       }catch(error){
-        console.log(error);
+        logError(error);
       }
     }
 
     const deleteFav = async(id)=>{
-      console.log(id);
       try {
         const res = await axios(`${APIBaseUrl}/favorites/${id}`, {
           method:"DELETE"
@@ -78,7 +80,7 @@ export default function UserProvider({children}) {
           getFavorites();
         }
       } catch (error) {
-        console.log(error);
+        logError(error);
       }
     }
   

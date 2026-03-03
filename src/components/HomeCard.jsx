@@ -9,7 +9,7 @@ import { UserContext } from '../context/User';
 import axios from 'axios';
 
 export default function HomeCard(props) {
-  const { user , getCarts, favorites, getFavorites, deleteFav } = useContext(UserContext);
+  const { user , getCarts, favorites, getFavorites } = useContext(UserContext);
   const [isLiked, setLiked] = useState(true);
   const [cart, setCart] = useState([]);
   const {item, setProducts, products}= props;
@@ -28,12 +28,9 @@ export default function HomeCard(props) {
         setLiked(false);
       }
     })
-    console.log(isLiked);
   }
 
     const clickFav = (id)=>{
-      console.log(id);
-      console.log(item);
       
       if(isLiked){
           setLiked(false);
@@ -51,17 +48,9 @@ export default function HomeCard(props) {
     };
 
     const addFavProduct =async (productId, user)=>{
-      console.log(user.id);
-      console.log(productId);
       try{
-        const res = await fetch(`${APIBaseUrl}/favorites/`, {
-          method: "POST",
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({product:productId, userId:user.id})
+        const {data} = await axios.post(`${APIBaseUrl}/favorites/`, {product:productId, userId:user.id
         });
-        const data= await res.json();
         isProductLiked();
       }
       catch(error){
@@ -70,17 +59,8 @@ export default function HomeCard(props) {
   }
 
   const addProductToCart =async (productId)=>{
-    console.log(user.id);
-    console.log(productId);
     try{
-      const res = await fetch(`${APIBaseUrl}/cart`, {
-        method: "POST",
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({product:productId, userId:user.id})
-      });
-      const data= await res.json();
+      const {data} = await axios.post(`${APIBaseUrl}/cart`, {product:productId, userId:user.id})
       setCart([...cart,data.data]);
       getCarts();
     }
@@ -90,7 +70,6 @@ export default function HomeCard(props) {
 }
 
   const deleteProduct = async(id)=>{
-    console.log(id);
     try {
       const res = await fetch(`${APIBaseUrl}/products/${id}`, {
         method:"DELETE"
@@ -107,11 +86,8 @@ export default function HomeCard(props) {
   }
 
   const deleteFavByProId = async (productId, user) => {
-    console.log(user.id);
-    console.log(productId);
     try {
         const res = await axios.delete(`${APIBaseUrl}/favorites/delete/${user.id}/${productId}`);
-        console.log(res.data);
         getFavorites();
     } catch (error) {
         console.error(error);

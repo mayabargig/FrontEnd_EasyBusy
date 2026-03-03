@@ -2,9 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ArrowLeftSquare } from 'react-bootstrap-icons';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { PhoneVibrate, Heart, SendCheck, Trash3Fill, HeartFill, Cart} from "react-bootstrap-icons";
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { APIBaseUrl } from '../config';
 import { Input } from 'antd';
 import { UserContext } from '../context/User';
@@ -17,7 +15,7 @@ export default function HomeCardEdit(props) {
 
   
   const handleFileChange = (e) => {
-      console.log(e.target.files[0]);
+      // console.log(e.target.files[0]);
       const file = e.target.files[0];
       // if (file) {
           //   const reader = new FileReader();
@@ -33,10 +31,7 @@ export default function HomeCardEdit(props) {
               setFormData({ ...formData, [name]: value});
           };
             
-console.log(formData);
-
 const addProducts = async ()=>{
-     console.log(formData);
     try{
       const res = await fetch(`${APIBaseUrl}/products`, {
         method: "POST",
@@ -48,7 +43,6 @@ const addProducts = async ()=>{
       });
       const data= await res.json();
       setProducts([...products,data.data]);
-      console.log(data);
     }
     catch(error){
       console.log(error);

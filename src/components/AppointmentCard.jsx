@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap';
 import { Clock, Bell, BellSlash, Shield } from "react-bootstrap-icons";
 
 function findAvailableTimeSlots(businessStartTime, businessEndTime, appointmentDuration)
-// : Array<{ startTime: string, endTime: string }> 
 {
   const availableTimeSlots = [];
   let currentTime = new Date(`2000-01-01T${businessStartTime}`);
@@ -24,43 +23,29 @@ export default function AppointmentCard(props) {
   const { sendEmailToCheck } = props;
   /** @type {{timeSlot : { start:string,end:string}}[]} */
   const items
-    // : { timeSlot: { start: string, end: string } }[]
     = props.items
   const { date }= props
-  console.log(items);
   const dateObj = new Date();
   const [isMatch, setIsMatch] = useState(true);
   const businessStartTime = '09:00';
   const businessEndTime = '17:00';
   const appointmentDuration = 120
   const [availableTimeSlots, setAvailableTimeSlots] = useState
-    // < Array < { startTime: string, endTime: string } >>
     ([]);
   const occupiedAppointments = items.map(i => ({
     startTime: new Date(`2000-01-01T${i?.timeSlot?.start}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     endTime: new Date(`2000-01-01T${i?.timeSlot?.end}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   }))
 
-  // const newDate = dateObj.toLocaleDateString('en-GB', {
-  //   day: '2-digit',
-  //   month: '2-digit',
-  //   year: 'numeric',
-  // }
-  // );
-
   const dayOfWeek = dateObj.toLocaleDateString('en-GB', {
     weekday: 'long',
   });
-
 
   useEffect(() => {
     const slots = findAvailableTimeSlots(businessStartTime,
       businessEndTime, appointmentDuration);
     setAvailableTimeSlots(slots);
   }, []);
-
-
-  console.log(isMatch);
 
   return (
     <div>

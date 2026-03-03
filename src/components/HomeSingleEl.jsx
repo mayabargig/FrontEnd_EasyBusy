@@ -10,7 +10,6 @@ import { Button } from 'react-bootstrap';
 function HomeSingleEl (){
     const params = useParams();
     const [product, setProduct] = useState({});
-    console.log(params.id);
     const [isLiked, setLiked] = useState();
 
     //TODO:
@@ -26,14 +25,12 @@ function HomeSingleEl (){
         }
     }
 
-    console.log(product);
-
     useEffect(()=>{
       getProduct();
     },[]);
 
     return(
-      <div className='productCard  dark:text-white dark:bg-black' id='card'>
+      <div className='productCard dark:text-white dark:bg-black' id='card'>
       <Card style={{ width: '18rem', border:"1.5px solid white", boxShadow:"1px 2px 3px 2px black" }} className=' dark:text-white dark:bg-black'>
       <div className='divHearts'>
           <div>

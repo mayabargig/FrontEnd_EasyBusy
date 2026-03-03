@@ -29,7 +29,6 @@ export default function Home() {
     setClick(!isClick);
   };
 
-  console.log(products);
   return (
     <div className=' dark:text-white dark:bg-black'>
       {isClick?(
@@ -39,7 +38,7 @@ export default function Home() {
             <h1>All My Products...
               {
               user.role === "admin"?(
-                <button onClick={addLink}type="button" className="btn btn-light important!" title='Add Product'> <PlusCircleFill/></button>
+                <button onClick={addLink}type="button" className="btn btn-gray dark:text-white dark:bg-black" title='Add Product'> <PlusCircleFill/></button>
               ):null 
               }
             </h1>
